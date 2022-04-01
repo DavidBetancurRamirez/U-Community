@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {useEffect} from "react";
+import { Helmet } from 'react-helmet';
+import Header from './componentes/Header';
+import Aside from "./componentes/Aside";
+import Comunidades from "./componentes/Comunidades";
 
-function App() {
+const App = ({cambiarEstadoAlerta, cambiarAlerta}) => {
+
+  useEffect(() => {
+    cambiarEstadoAlerta(true)
+    cambiarAlerta({ tipo: "exito", mensaje: "Bienvenido a U community" })
+  }, [cambiarEstadoAlerta, cambiarAlerta])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Helmet>
+        <title>U Community</title>
+      </Helmet>
+
+      <Header cambiarAlerta={cambiarAlerta} cambiarEstadoAlerta={cambiarEstadoAlerta} />
+
+      <Aside />
+      <Comunidades />
+    </>
   );
 }
-
+ 
 export default App;
