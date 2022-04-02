@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import {Menu, Titulo, Lista, ListaLi} from './aside'
 import {ReactComponent as IconoPlus} from '../imagenes/IconoPlus.svg'
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from "../contextos/authContext";
 
 const Crear = styled.div`
     float: right;
@@ -36,12 +37,19 @@ const Plus = styled.div`
     }
 `;
 
-const MisComunidades = () => {
+const MisComunidades = ({cambiarEstadoAlerta, cambiarAlerta}) => {
 
     const navigate = useNavigate();
+    const {user} = useAuth()
 
     const handleClick = () => {
-        navigate("/formulario");
+        if(user) {
+            navigate("/formulario");
+        } else {
+            navigate("/login");
+            cambiarEstadoAlerta(true)
+            cambiarAlerta({ tipo: "error", mensaje: "Para poder crear una comunidad es necesario iniciar sesión" })
+        }
     }
 
     return (

@@ -4,6 +4,7 @@ const theme = {
     rojo: '#E34747', 
     grisOscuro: '#C4C4C4',
     grisClaro: '#E8EFF1',
+    errorCategoria: '#56494E',
     categoria: {
         estudio: '#09A4DD',
         trueque: '#524EF5',

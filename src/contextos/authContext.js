@@ -6,7 +6,7 @@ import {
     onAuthStateChanged,
     signOut,
     GoogleAuthProvider,
-    signInWithPopup,
+    signInWithRedirect,
     sendPasswordResetEmail
 } from 'firebase/auth';
 
@@ -35,7 +35,7 @@ export function AuthProvider ({children}) {
 
     const loginWithGoogle = () => {
         const googleProvider  = new GoogleAuthProvider()
-        return signInWithPopup (auth, googleProvider)
+        return signInWithRedirect (auth, googleProvider)
     }
 
     const resetPasword = (email) => {

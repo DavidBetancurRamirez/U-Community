@@ -93,7 +93,7 @@ const Login = ({cambiarEstadoAlerta, cambiarAlerta}) => {
                     <Label>Password</Label>
                 </div>
 
-                <Boton onClick={handleSubmit}>
+                <Boton onClick={handleSubmit} type="submit">
                     <span></span>
                     <span></span>
                     <span></span>

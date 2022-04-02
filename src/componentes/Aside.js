@@ -11,11 +11,11 @@ const AsideBar = styled.div`
     float: left;
 `;
 
-const Aside = () => {
+const Aside = ({cambiarEstadoAlerta, cambiarAlerta}) => {
     return (
         <AsideBar>
             <Categorias />
-            <MisComunidades />
+            <MisComunidades cambiarAlerta={cambiarAlerta} cambiarEstadoAlerta={cambiarEstadoAlerta} />
             <MisParticipaciones />
         </AsideBar>
     );

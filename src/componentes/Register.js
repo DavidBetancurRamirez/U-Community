@@ -19,7 +19,7 @@ const Register = ({cambiarEstadoAlerta, cambiarAlerta}) => {
         try{
             console.log("Hola")
             await loginWithGoogle()
-            console.log("Hola")
+            console.log("chao")
             navigate('/');
             cambiarEstadoAlerta(true)
             cambiarAlerta({ tipo: "exito", mensaje: "Usuario creado con exito" })            
@@ -83,7 +83,7 @@ const Register = ({cambiarEstadoAlerta, cambiarAlerta}) => {
                         />
                         <Label>Password</Label>
                     </div>
-                    <Boton onClick={handleSubmit}>
+                    <Boton type="submit" onClick={handleSubmit}>
                         <span></span>
                         <span></span>
                         <span></span>

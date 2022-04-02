@@ -19,8 +19,8 @@ const App = ({cambiarEstadoAlerta, cambiarAlerta}) => {
 
       <Header cambiarAlerta={cambiarAlerta} cambiarEstadoAlerta={cambiarEstadoAlerta} />
 
-      <Aside />
-      <Comunidades />
+      <Aside cambiarAlerta={cambiarAlerta} cambiarEstadoAlerta={cambiarEstadoAlerta} />
+      <Comunidades cambiarAlerta={cambiarAlerta} cambiarEstadoAlerta={cambiarEstadoAlerta} />
     </>
   );
 }

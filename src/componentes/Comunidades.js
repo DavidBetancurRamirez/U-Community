@@ -4,6 +4,7 @@ import {ReactComponent as IconoInfo} from '../imagenes/IconoInfo.svg'
 import {ReactComponent as IconoCalendario} from '../imagenes/IconoCalendario.svg'
 import theme from "../theme";
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from "../contextos/authContext";
 
 const Main = styled.div`
     width: 80%;
@@ -28,9 +29,28 @@ const Comunidad = styled.div`
     flex-shrink: 0;
     flex-grow: 1;
     cursor: pointer;
+
+    .estudio {
+        background-color: ${theme.categoria.estudio};
+    }
+    .trueque {
+        background-color: ${theme.categoria.trueque};
+    }
+    .diversion {
+        background-color: ${theme.categoria.diversion};
+    }
+    .transporte {
+        background-color: ${theme.categoria.transporte};
+    }
+    .venta {
+        background-color: ${theme.categoria.venta};
+    }
+    .compra {
+        background-color: ${theme.categoria.compra};
+    }
 `;
 const Titulo = styled.div`
-    background-color: ${theme.categoria.estudio};
+    background-color: ${theme.errorCategoria};
     display: flex;
     height: 50px;
     justify-content: center;
@@ -77,13 +97,24 @@ const Fecha = styled.div`
     font-weight: 300;
 `;
 
-const Comunidades = () => {
+const Comunidades = ({cambiarEstadoAlerta, cambiarAlerta}) => {
     const navigate = useNavigate()
+    const {user} = useAuth()
+
+    const handleClick = () => {
+        if(user) {
+            navigate("/comunidad");
+        } else {
+            navigate("/login");
+            cambiarEstadoAlerta(true)
+            cambiarAlerta({ tipo: "error", mensaje: "Para poder crear una comunidad es necesario iniciar sesión" })
+        }
+    }
 
     return (
         <Main>
-            <Comunidad onClick={() => navigate("/comunidad")}> 
-                <Titulo tipo="estudio">
+            <Comunidad onClick={handleClick}> 
+                <Titulo  className="estudio">
                     Taller refuerzo parcial geometria
                 </Titulo>
                 <Categoria>
@@ -98,13 +129,12 @@ const Comunidades = () => {
                     <IconoInfo />
                 </Info>
             </Comunidad>
-
-            <Comunidad onClick={() => navigate("/comunidad")}> 
-                <Titulo tipo="estudio">
+            <Comunidad onClick={handleClick}> 
+                <Titulo className="venta">
                     Taller refuerzo parcial geometria
                 </Titulo>
                 <Categoria>
-                    Estudio
+                    Venta
                 </Categoria>
                 <Objetivo>
                     Contratar un profesor para la explicacion y resolucion del taller de geometria y muchas otras cosas, estoy probando el ellipsis lo peor esq aun falta para ver si sirve. parece q no esta funcionando, escribire mucho a ver si sale por debajo, un poco mas ojala q no porq no se como mas solucionarlo
@@ -115,13 +145,12 @@ const Comunidades = () => {
                     <IconoInfo />
                 </Info>
             </Comunidad>
-
-            <Comunidad onClick={() => navigate("/comunidad")}> 
-                <Titulo tipo="estudio">
+            <Comunidad onClick={handleClick}> 
+                <Titulo className="trueque">
                     Taller refuerzo parcial geometria
                 </Titulo>
                 <Categoria>
-                    Estudio
+                    Trueque
                 </Categoria>
                 <Objetivo>
                     Contratar un profesor para la explicacion y resolucion del taller de geometria y muchas otras cosas, estoy probando el ellipsis lo peor esq aun falta para ver si sirve. parece q no esta funcionando, escribire mucho a ver si sale por debajo, un poco mas ojala q no porq no se como mas solucionarlo
@@ -132,13 +161,12 @@ const Comunidades = () => {
                     <IconoInfo />
                 </Info>
             </Comunidad>
-
-            <Comunidad onClick={() => navigate("/comunidad")}> 
-                <Titulo tipo="estudio">
+            <Comunidad onClick={handleClick}> 
+                <Titulo className="diversion">
                     Taller refuerzo parcial geometria
                 </Titulo>
                 <Categoria>
-                    Estudio
+                    Diversion
                 </Categoria>
                 <Objetivo>
                     Contratar un profesor para la explicacion y resolucion del taller de geometria y muchas otras cosas, estoy probando el ellipsis lo peor esq aun falta para ver si sirve. parece q no esta funcionando, escribire mucho a ver si sale por debajo, un poco mas ojala q no porq no se como mas solucionarlo
@@ -149,13 +177,12 @@ const Comunidades = () => {
                     <IconoInfo />
                 </Info>
             </Comunidad>
-
-            <Comunidad onClick={() => navigate("/comunidad")}> 
-                <Titulo tipo="estudio">
+            <Comunidad onClick={handleClick}> 
+                <Titulo className="transporte">
                     Taller refuerzo parcial geometria
                 </Titulo>
                 <Categoria>
-                    Estudio
+                    Transporte
                 </Categoria>
                 <Objetivo>
                     Contratar un profesor para la explicacion y resolucion del taller de geometria y muchas otras cosas, estoy probando el ellipsis lo peor esq aun falta para ver si sirve. parece q no esta funcionando, escribire mucho a ver si sale por debajo, un poco mas ojala q no porq no se como mas solucionarlo
@@ -166,7 +193,38 @@ const Comunidades = () => {
                     <IconoInfo />
                 </Info>
             </Comunidad>
-
+            <Comunidad onClick={handleClick}> 
+                <Titulo className="compra">
+                    Taller refuerzo parcial geometria
+                </Titulo>
+                <Categoria>
+                    Compra
+                </Categoria>
+                <Objetivo>
+                    Contratar un profesor para la explicacion y resolucion del taller de geometria y muchas otras cosas, estoy probando el ellipsis lo peor esq aun falta para ver si sirve. parece q no esta funcionando, escribire mucho a ver si sale por debajo, un poco mas ojala q no porq no se como mas solucionarlo
+                </Objetivo> 
+                <Info>
+                    <IconoCalendario />
+                    <Fecha>01/03/2022</Fecha>
+                    <IconoInfo />
+                </Info>
+            </Comunidad>
+            <Comunidad onClick={handleClick}> 
+                <Titulo className="">
+                    Taller refuerzo parcial geometria
+                </Titulo>
+                <Categoria>
+                    Error al cargar color
+                </Categoria>
+                <Objetivo>
+                    Contratar un profesor para la explicacion y resolucion del taller de geometria y muchas otras cosas, estoy probando el ellipsis lo peor esq aun falta para ver si sirve. parece q no esta funcionando, escribire mucho a ver si sale por debajo, un poco mas ojala q no porq no se como mas solucionarlo
+                </Objetivo> 
+                <Info>
+                    <IconoCalendario />
+                    <Fecha>01/03/2022</Fecha>
+                    <IconoInfo />
+                </Info>
+            </Comunidad>
         </Main>
     );
 }
