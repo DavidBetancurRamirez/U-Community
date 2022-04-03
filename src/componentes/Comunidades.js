@@ -1,10 +1,13 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
+import { db } from "../firebase/firebaseConfig";
+import { collection, onSnapshot } from "firebase/firestore";
 import styled from 'styled-components';
 import {ReactComponent as IconoInfo} from '../imagenes/IconoInfo.svg'
 import {ReactComponent as IconoCalendario} from '../imagenes/IconoCalendario.svg'
 import theme from "../theme";
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from "../contextos/authContext";
+//import fromUnixTime from 'date-fns/fromUnixTime';
 
 const Main = styled.div`
     width: 80%;
@@ -30,23 +33,23 @@ const Comunidad = styled.div`
     flex-grow: 1;
     cursor: pointer;
 
-    .estudio {
-        background-color: ${theme.categoria.estudio};
+    .Compra {
+        background-color: ${theme.categoria.compra};
     }
-    .trueque {
-        background-color: ${theme.categoria.trueque};
-    }
-    .diversion {
+    .Diversion {
         background-color: ${theme.categoria.diversion};
     }
-    .transporte {
+    .Estudio {
+        background-color: ${theme.categoria.estudio};
+    }
+    .Transporte {
         background-color: ${theme.categoria.transporte};
     }
-    .venta {
+    .Trueque {
+        background-color: ${theme.categoria.trueque};
+    }    
+    .Venta {
         background-color: ${theme.categoria.venta};
-    }
-    .compra {
-        background-color: ${theme.categoria.compra};
     }
 `;
 const Titulo = styled.div`
@@ -96,10 +99,65 @@ const Fecha = styled.div`
     align-items: center;
     font-weight: 300;
 `;
+const SinComunidades = styled.div`
+    width: 80%;
+    max-width: 1500px;
+    margin: auto;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 20px;
+    background: linear-gradient(315deg, #ffffff, #dadada);
+    box-shadow:  -20px -20px 60px #cecece,
+                20px 20px 60px #ffffff;
+
+    h2 {
+        font-size: 30px;
+        font-weight: 900;
+        margin: 20px 0;
+    }
+    p {
+        font-weight: 300;
+        font-size: 20px;
+    }
+    button {
+        background-image: radial-gradient(circle at 7.7% 50%, #0067ff 0, #005fff 12.5%, #0055ff 25%, #4f4afd 37.5%, #783cf2 50%, #9429e6 62.5%, #ab02d8 75%, #bd00ca 87.5%, #cc00ba 100%);
+        border: none;
+        border-radius: 10px;
+        padding: 5px 10px;
+        margin: 30px 0;
+        cursor: pointer;
+        font-weight: 300;
+        font-size: 20px;
+        color: #fff;  
+        transition: 1s linear all;
+
+        &:hover {
+            color: #000;
+            background-image: radial-gradient(circle at 86.64% 71.15%, #0067ff 0, #005fff 12.5%, #0055ff 25%, #4f4afd 37.5%, #783cf2 50%, #9429e6 62.5%, #ab02d8 75%, #bd00ca 87.5%, #cc00ba 100%);
+        }
+    }
+`;
 
 const Comunidades = ({cambiarEstadoAlerta, cambiarAlerta}) => {
+    const [comunidades, cambiarComunidades] = useState([])
     const navigate = useNavigate()
     const {user} = useAuth()
+
+    useEffect(() => {
+        onSnapshot(collection(db, 'comunidades'), 
+            (snapshot) => {
+                const arregloComunidades = snapshot.docs.map((comunidad) => {
+                    return {...comunidad.data(), id: comunidad.id}
+                })
+
+                cambiarComunidades(arregloComunidades)
+            }, (error) => {
+                cambiarEstadoAlerta(true)
+                cambiarAlerta({ tipo: "error", mensaje: error })
+        })
+    })
 
     const handleClick = () => {
         if(user) {
@@ -111,121 +169,44 @@ const Comunidades = ({cambiarEstadoAlerta, cambiarAlerta}) => {
         }
     }
 
+    const handleClickForm = () => {
+        if(user) {
+            navigate("/formulario");
+        } else {
+            navigate("/login");
+            cambiarEstadoAlerta(true)
+            cambiarAlerta({ tipo: "error", mensaje: "Para poder crear una comunidad es necesario iniciar sesión" })
+        }
+    }
+
     return (
-        <Main>
-            <Comunidad onClick={handleClick}> 
-                <Titulo  className="estudio">
-                    Taller refuerzo parcial geometria
-                </Titulo>
-                <Categoria>
-                    Estudio
-                </Categoria>
-                <Objetivo>
-                    Contratar un profesor para la explicacion y resolucion del taller de geometria y muchas otras cosas, estoy probando el ellipsis lo peor esq aun falta para ver si sirve. parece q no esta funcionando, escribire mucho a ver si sale por debajo, un poco mas ojala q no porq no se como mas solucionarlo
-                </Objetivo> 
-                <Info>
-                    <IconoCalendario />
-                    <Fecha>01/03/2022</Fecha>
-                    <IconoInfo />
-                </Info>
-            </Comunidad>
-            <Comunidad onClick={handleClick}> 
-                <Titulo className="venta">
-                    Taller refuerzo parcial geometria
-                </Titulo>
-                <Categoria>
-                    Venta
-                </Categoria>
-                <Objetivo>
-                    Contratar un profesor para la explicacion y resolucion del taller de geometria y muchas otras cosas, estoy probando el ellipsis lo peor esq aun falta para ver si sirve. parece q no esta funcionando, escribire mucho a ver si sale por debajo, un poco mas ojala q no porq no se como mas solucionarlo
-                </Objetivo> 
-                <Info>
-                    <IconoCalendario />
-                    <Fecha>01/03/2022</Fecha>
-                    <IconoInfo />
-                </Info>
-            </Comunidad>
-            <Comunidad onClick={handleClick}> 
-                <Titulo className="trueque">
-                    Taller refuerzo parcial geometria
-                </Titulo>
-                <Categoria>
-                    Trueque
-                </Categoria>
-                <Objetivo>
-                    Contratar un profesor para la explicacion y resolucion del taller de geometria y muchas otras cosas, estoy probando el ellipsis lo peor esq aun falta para ver si sirve. parece q no esta funcionando, escribire mucho a ver si sale por debajo, un poco mas ojala q no porq no se como mas solucionarlo
-                </Objetivo> 
-                <Info>
-                    <IconoCalendario />
-                    <Fecha>01/03/2022</Fecha>
-                    <IconoInfo />
-                </Info>
-            </Comunidad>
-            <Comunidad onClick={handleClick}> 
-                <Titulo className="diversion">
-                    Taller refuerzo parcial geometria
-                </Titulo>
-                <Categoria>
-                    Diversion
-                </Categoria>
-                <Objetivo>
-                    Contratar un profesor para la explicacion y resolucion del taller de geometria y muchas otras cosas, estoy probando el ellipsis lo peor esq aun falta para ver si sirve. parece q no esta funcionando, escribire mucho a ver si sale por debajo, un poco mas ojala q no porq no se como mas solucionarlo
-                </Objetivo> 
-                <Info>
-                    <IconoCalendario />
-                    <Fecha>01/03/2022</Fecha>
-                    <IconoInfo />
-                </Info>
-            </Comunidad>
-            <Comunidad onClick={handleClick}> 
-                <Titulo className="transporte">
-                    Taller refuerzo parcial geometria
-                </Titulo>
-                <Categoria>
-                    Transporte
-                </Categoria>
-                <Objetivo>
-                    Contratar un profesor para la explicacion y resolucion del taller de geometria y muchas otras cosas, estoy probando el ellipsis lo peor esq aun falta para ver si sirve. parece q no esta funcionando, escribire mucho a ver si sale por debajo, un poco mas ojala q no porq no se como mas solucionarlo
-                </Objetivo> 
-                <Info>
-                    <IconoCalendario />
-                    <Fecha>01/03/2022</Fecha>
-                    <IconoInfo />
-                </Info>
-            </Comunidad>
-            <Comunidad onClick={handleClick}> 
-                <Titulo className="compra">
-                    Taller refuerzo parcial geometria
-                </Titulo>
-                <Categoria>
-                    Compra
-                </Categoria>
-                <Objetivo>
-                    Contratar un profesor para la explicacion y resolucion del taller de geometria y muchas otras cosas, estoy probando el ellipsis lo peor esq aun falta para ver si sirve. parece q no esta funcionando, escribire mucho a ver si sale por debajo, un poco mas ojala q no porq no se como mas solucionarlo
-                </Objetivo> 
-                <Info>
-                    <IconoCalendario />
-                    <Fecha>01/03/2022</Fecha>
-                    <IconoInfo />
-                </Info>
-            </Comunidad>
-            <Comunidad onClick={handleClick}> 
-                <Titulo className="">
-                    Taller refuerzo parcial geometria
-                </Titulo>
-                <Categoria>
-                    Error al cargar color
-                </Categoria>
-                <Objetivo>
-                    Contratar un profesor para la explicacion y resolucion del taller de geometria y muchas otras cosas, estoy probando el ellipsis lo peor esq aun falta para ver si sirve. parece q no esta funcionando, escribire mucho a ver si sale por debajo, un poco mas ojala q no porq no se como mas solucionarlo
-                </Objetivo> 
-                <Info>
-                    <IconoCalendario />
-                    <Fecha>01/03/2022</Fecha>
-                    <IconoInfo />
-                </Info>
-            </Comunidad>
-        </Main>
+        comunidades.length > 0 ?
+            <Main>
+                {comunidades.map((comunidad) => (
+                    <Comunidad onClick={handleClick} key={comunidad.id} id={comunidad.id}> 
+                        <Titulo  className={comunidad.categoria}>
+                            {comunidad.titulo}
+                        </Titulo>
+                        <Categoria>
+                            {comunidad.categoria}
+                        </Categoria>
+                        <Objetivo>
+                            {comunidad.objetivo}
+                        </Objetivo> 
+                        <Info>
+                            <IconoCalendario />
+                            <Fecha>{comunidad.fecha}</Fecha>
+                            <IconoInfo />
+                        </Info>
+                    </Comunidad>
+                ))}               
+            </Main>
+        :
+            <SinComunidades>
+                <h2>WOOOOW</h2>
+                <p>Parece que no hay comunidades aun, se el primero en crear una!!!</p>
+                <button onClick={handleClickForm}>Crea tu propia comunidad</button>
+            </SinComunidades>
     );
 }
  

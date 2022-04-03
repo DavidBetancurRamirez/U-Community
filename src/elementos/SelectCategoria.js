@@ -65,12 +65,12 @@ const SelectCategoria = ({categoria, cambiarCategoria}) => {
     const [mostrarSelect, cambiarMostrarSelect] = useState(false)
 
     const categorias = [
-        {id: "compras", texto: "compras"},
-        {id: "diversion", texto: "diversion"},
-        {id: "estudio", texto: "estudio"},
-        {id: "transporte", texto: "transporte"},
-        {id: "trueque", texto: "trueque"},
-        {id: "venta", texto: "venta"}
+        {id: "compras", texto: "Compras"},
+        {id: "diversion", texto: "Diversion"},
+        {id: "estudio", texto: "Estudio"},
+        {id: "transporte", texto: "Transporte"},
+        {id: "trueque", texto: "Trueque"},
+        {id: "venta", texto: "Venta"}
     ]
 
     const handleClick = (e) => {

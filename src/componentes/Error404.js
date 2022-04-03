@@ -79,7 +79,7 @@ const ContenedorBoton = styled.div`
 const Volver = styled.button`
     background-color: ${theme.azulU};
     opacity: .8;
-    border: none;
+    border: 1px solid transparent;
     border-radius: 10px;
     width: 80%;
     height: 35px;
