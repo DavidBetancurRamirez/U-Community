@@ -1,13 +1,12 @@
-import React, {useEffect, useState} from "react";
-import { db } from "../firebase/firebaseConfig";
-import { collection, onSnapshot } from "firebase/firestore";
+import React from "react";
 import styled from 'styled-components';
 import {ReactComponent as IconoInfo} from '../imagenes/IconoInfo.svg'
 import {ReactComponent as IconoCalendario} from '../imagenes/IconoCalendario.svg'
 import theme from "../theme";
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from "../contextos/authContext";
-//import fromUnixTime from 'date-fns/fromUnixTime';
+import {format, fromUnixTime} from 'date-fns';
+import useObtenerComunidades from "../hooks/useObtenerComunidades";
 
 const Main = styled.div`
     width: 80%;
@@ -33,7 +32,7 @@ const Comunidad = styled.div`
     flex-grow: 1;
     cursor: pointer;
 
-    .Compra {
+    .Compras {
         background-color: ${theme.categoria.compra};
     }
     .Diversion {
@@ -141,23 +140,14 @@ const SinComunidades = styled.div`
 `;
 
 const Comunidades = ({cambiarEstadoAlerta, cambiarAlerta}) => {
-    const [comunidades, cambiarComunidades] = useState([])
+    const [comunidades] = useObtenerComunidades();
+
     const navigate = useNavigate()
     const {user} = useAuth()
 
-    useEffect(() => {
-        onSnapshot(collection(db, 'comunidades'), 
-            (snapshot) => {
-                const arregloComunidades = snapshot.docs.map((comunidad) => {
-                    return {...comunidad.data(), id: comunidad.id}
-                })
-
-                cambiarComunidades(arregloComunidades)
-            }, (error) => {
-                cambiarEstadoAlerta(true)
-                cambiarAlerta({ tipo: "error", mensaje: error })
-        })
-    })
+    const formatearFecha  = (fechaMaxima) => {
+        return format(fromUnixTime(fechaMaxima), "dd'/'MM'/'yyyy")
+    }
 
     const handleClick = () => {
         if(user) {
@@ -195,7 +185,7 @@ const Comunidades = ({cambiarEstadoAlerta, cambiarAlerta}) => {
                         </Objetivo> 
                         <Info>
                             <IconoCalendario />
-                            <Fecha>{comunidad.fecha}</Fecha>
+                            <Fecha>{formatearFecha(comunidad.fechaMaxima)}</Fecha>
                             <IconoInfo />
                         </Info>
                     </Comunidad>

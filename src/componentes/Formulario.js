@@ -12,7 +12,6 @@ import Header from "./Header";
 import { useAuth } from "../contextos/authContext";
 
 const Formulario = ({cambiarEstadoAlerta, cambiarAlerta}) => {
-
   const [inputTitulo, cambiarInputTitulo] = useState("")
   const [categoria, cambiarCategoria] = useState("Estudio")
   const [fecha, cambiarFecha] = useState(new Date());
@@ -48,13 +47,15 @@ const Formulario = ({cambiarEstadoAlerta, cambiarAlerta}) => {
     e.preventDefault()
 
     let maxPersonas = parseFloat(maximoPersonas).toFixed(2);
+    let fechaHoy = new Date();
 
     try {
       await agregarComunidad({
         titulo: inputTitulo,
         categoria: categoria,
         objetivo: inputObjetivo,
-        fecha: getUnixTime(fecha),
+        fechaMaxima: getUnixTime(fecha),
+        fechaCreacion: getUnixTime(fechaHoy),
         maxPersonas: maxPersonas,
         uidUsuario: user.uid
       })
