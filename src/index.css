@@ -4,7 +4,8 @@
   box-sizing: border-box;
   font-family: 'Open Sans', sans-serif;
   font-size: 16px;
-  font-weight: normal;
+  font-weight: normal;  
+  caret-color: #09A4DD;
 }
 body{
   background-color: #f2f2f2;
@@ -22,4 +23,4 @@ body{
   background-color: #797979;
   border-radius: 20px;
   border: 2px solid #f1f2f3;
-}
+} 

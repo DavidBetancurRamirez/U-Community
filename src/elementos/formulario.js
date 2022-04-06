@@ -10,7 +10,6 @@ const Contenedor = styled.div`
     opacity: .8;
     border-radius: 10px;
     border: 1px solid #fff;
-    caret-color: ${theme.azulU};
     outline: none;
     padding: 5px;
   }

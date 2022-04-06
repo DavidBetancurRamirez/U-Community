@@ -4,9 +4,9 @@ import {ReactComponent as IconoInfo} from '../imagenes/IconoInfo.svg'
 import {ReactComponent as IconoCalendario} from '../imagenes/IconoCalendario.svg'
 import theme from "../theme";
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from "../contextos/authContext";
 import useObtenerComunidades from "../hooks/useObtenerComunidades";
 import formatearFecha from "../funciones/formatearFecha";
+import SpinnerLoader from "../imagenes/SpinnerLoader.gif"
 
 const Main = styled.div`
     width: 80%;
@@ -86,7 +86,7 @@ const Fecha = styled.div`
     align-items: center;
     font-weight: 300;
 `;
-const SinComunidades = styled.div`
+const Cargando = styled.div`
     width: 80%;
     max-width: 1500px;
     margin: auto;
@@ -95,53 +95,13 @@ const SinComunidades = styled.div`
     flex-direction: column;
     align-items: center;
     border-radius: 20px;
-    background: linear-gradient(315deg, #ffffff, #dadada);
-    box-shadow:  -20px -20px 60px #cecece,
-                20px 20px 60px #ffffff;
-
-    h2 {
-        font-size: 30px;
-        font-weight: 900;
-        margin: 20px 0;
-    }
-    p {
-        font-weight: 300;
-        font-size: 20px;
-    }
-    button {
-        background-image: radial-gradient(circle at 7.7% 50%, #0067ff 0, #005fff 12.5%, #0055ff 25%, #4f4afd 37.5%, #783cf2 50%, #9429e6 62.5%, #ab02d8 75%, #bd00ca 87.5%, #cc00ba 100%);
-        border: none;
-        border-radius: 10px;
-        padding: 5px 10px;
-        margin: 30px 0;
-        cursor: pointer;
-        font-weight: 300;
-        font-size: 20px;
-        color: #fff;  
-        transition: 1s linear all;
-
-        &:hover {
-            color: #000;
-            background-image: radial-gradient(circle at 86.64% 71.15%, #0067ff 0, #005fff 12.5%, #0055ff 25%, #4f4afd 37.5%, #783cf2 50%, #9429e6 62.5%, #ab02d8 75%, #bd00ca 87.5%, #cc00ba 100%);
-        }
-    }
+    background: transparent;
 `;
 
-const Comunidades = ({cambiarEstadoAlerta, cambiarAlerta}) => {
+const Comunidades = () => {
     const [comunidades] = useObtenerComunidades();
 
     const navigate = useNavigate()
-    const {user} = useAuth()
-
-    const handleClickForm = () => {
-        if(user) {
-            navigate("/formulario");
-        } else {
-            navigate("/login");
-            cambiarEstadoAlerta(true)
-            cambiarAlerta({ tipo: "error", mensaje: "Para poder crear una comunidad es necesario iniciar sesión" })
-        }
-    }
 
     return (
         comunidades.length > 0 ?
@@ -166,11 +126,9 @@ const Comunidades = ({cambiarEstadoAlerta, cambiarAlerta}) => {
                 ))}               
             </Main>
         :
-            <SinComunidades>
-                <h2>WOOOOW</h2>
-                <p>Parece que no hay comunidades aun, se el primero en crear una!!!</p>
-                <button onClick={handleClickForm}>Crea tu propia comunidad</button>
-            </SinComunidades>
+            <Cargando>
+                <img src={SpinnerLoader} alt="Cargando..." />
+            </Cargando>
     );
 }
  

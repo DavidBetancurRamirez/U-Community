@@ -134,6 +134,7 @@ const Unirme = styled.div`
     cursor: pointer;
     transition: 1.5s ease all;
     height: 50px;
+    padding-left: 10px;
 
     svg {
         height: 30px;
@@ -143,7 +144,6 @@ const Unirme = styled.div`
 
     &:hover {
         background-color: #DEE8D5;
-        opacity: 0.5;
     }
 `;
 
@@ -158,26 +158,17 @@ const InputComentarios = styled.div`
         opacity: .8;
         border-radius: 10px;
         border: 1px solid #fff;
-        caret-color: ${theme.azulU};
         outline: none;
         padding: 5px;
     }
-
-    svg {
-        display: flex;
-        align-items: center;
-        margin: 0 10px;
-        cursor: pointer;
-        height: 28px;
-        width: 28px;
-        fill: currentColor !important;
-        color: ${theme.categoria.venta};
-
-        &:hover {
-            background-color: #DEE8D5;
-        }
-    }
 `;
+
+const Icono = {
+    width: "34px",
+    height: "34px",
+    cursor: "pointer",
+    margin: "0 8px"
+}
 
 const ContenedorComentarios = styled.div`
     background-color: #FBF5F3;
@@ -239,4 +230,4 @@ const TextoComentario = styled.div`
     text-align: justify;
 `;
 
-export {Contenedor, Regresar, ContenedorTitulo, Titulo, ContenedorInfo, Categoria, Fecha, Objetivo, Participacion, Participantes, Restricciones, Unirme, InputComentarios, ContenedorComentarios, HeaderComentarios, Comentarios, Comentario, Perfil, Nombre, TextoComentario}
+export {Contenedor, Regresar, ContenedorTitulo, Titulo, ContenedorInfo, Categoria, Fecha, Objetivo, Participacion, Participantes, Restricciones, Unirme, InputComentarios, Icono, ContenedorComentarios, HeaderComentarios, Comentarios, Comentario, Perfil, Nombre, TextoComentario}

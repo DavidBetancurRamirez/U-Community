@@ -6,11 +6,10 @@ import {ReactComponent as IconoCalendario} from '../imagenes/IconoCalendario.svg
 import {ReactComponent as IconoPersonas} from '../imagenes/IconoPersonas.svg'
 import {ReactComponent as IconoUnirme} from '../imagenes/IconoUnirme.svg'
 import {ReactComponent as IconoCaution} from '../imagenes/IconoCaution.svg'
-import {ReactComponent as IconoEnviar} from '../imagenes/IconoEnviar.svg'
 import {ReactComponent as IconoComentario} from '../imagenes/IconoComentario.svg'
 import {ReactComponent as IconoPerfil} from '../imagenes/IconoPerfil.svg'
 import {ReactComponent as IconoIzquierda} from '../imagenes/IconoIzquierda.svg'
-import {Contenedor, Regresar, ContenedorTitulo, Titulo, ContenedorInfo, Categoria, Fecha, Objetivo, Participacion, Participantes, Restricciones, Unirme, InputComentarios, ContenedorComentarios, HeaderComentarios, Comentarios, Comentario, Perfil, Nombre, TextoComentario} from '../elementos/comunidad'
+import {Contenedor, Regresar, ContenedorTitulo, Titulo, ContenedorInfo, Categoria, Fecha, Objetivo, Participacion, Participantes, Restricciones, Unirme, InputComentarios, Icono, ContenedorComentarios, HeaderComentarios, Comentarios, Comentario, Perfil, Nombre, TextoComentario} from '../elementos/comunidad'
 import useObtenerComunidad from "../hooks/useObtenerComunidad";
 import formatearFecha from "../funciones/formatearFecha";
 
@@ -19,8 +18,6 @@ const Comunidad = () => {
 
     const {id} = useParams();
     const [comunidad] = useObtenerComunidad(id)
-
-    console.log(comunidad)
 
     return (
     <>
@@ -52,7 +49,8 @@ const Comunidad = () => {
                 <InputComentarios>
                     <input 
                         placeholder="Escribe tu comentario"
-                    /><IconoEnviar />
+                    />
+                    <lord-icon src="https://cdn.lordicon.com/gzmgulpl.json" trigger="hover" style={Icono} />
                 </InputComentarios>
                 <ContenedorComentarios>
                     <HeaderComentarios><IconoComentario />Comentarios...</HeaderComentarios>
