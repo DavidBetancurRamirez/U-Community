@@ -5,8 +5,8 @@ import {ReactComponent as IconoCalendario} from '../imagenes/IconoCalendario.svg
 import theme from "../theme";
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from "../contextos/authContext";
-import {format, fromUnixTime} from 'date-fns';
 import useObtenerComunidades from "../hooks/useObtenerComunidades";
+import formatearFecha from "../funciones/formatearFecha";
 
 const Main = styled.div`
     width: 80%;
@@ -32,24 +32,12 @@ const Comunidad = styled.div`
     flex-grow: 1;
     cursor: pointer;
 
-    .Compras {
-        background-color: ${theme.categoria.compra};
-    }
-    .Diversion {
-        background-color: ${theme.categoria.diversion};
-    }
-    .Estudio {
-        background-color: ${theme.categoria.estudio};
-    }
-    .Transporte {
-        background-color: ${theme.categoria.transporte};
-    }
-    .Trueque {
-        background-color: ${theme.categoria.trueque};
-    }    
-    .Venta {
-        background-color: ${theme.categoria.venta};
-    }
+    .Compras {background-color: ${theme.categoria.compra};}
+    .Diversion {background-color: ${theme.categoria.diversion};}
+    .Estudio {background-color: ${theme.categoria.estudio};}
+    .Transporte {background-color: ${theme.categoria.transporte};}
+    .Trueque {background-color: ${theme.categoria.trueque};}    
+    .Venta {background-color: ${theme.categoria.venta};}
 `;
 const Titulo = styled.div`
     background-color: ${theme.errorCategoria};
@@ -145,20 +133,6 @@ const Comunidades = ({cambiarEstadoAlerta, cambiarAlerta}) => {
     const navigate = useNavigate()
     const {user} = useAuth()
 
-    const formatearFecha  = (fechaMaxima) => {
-        return format(fromUnixTime(fechaMaxima), "dd'/'MM'/'yyyy")
-    }
-
-    const handleClick = () => {
-        if(user) {
-            navigate("/comunidad");
-        } else {
-            navigate("/login");
-            cambiarEstadoAlerta(true)
-            cambiarAlerta({ tipo: "error", mensaje: "Para poder crear una comunidad es necesario iniciar sesión" })
-        }
-    }
-
     const handleClickForm = () => {
         if(user) {
             navigate("/formulario");
@@ -173,8 +147,8 @@ const Comunidades = ({cambiarEstadoAlerta, cambiarAlerta}) => {
         comunidades.length > 0 ?
             <Main>
                 {comunidades.map((comunidad) => (
-                    <Comunidad onClick={handleClick} key={comunidad.id} id={comunidad.id}> 
-                        <Titulo  className={comunidad.categoria}>
+                    <Comunidad onClick={() => navigate(`/comunidad/${comunidad.id}`)} key={comunidad.id} id={comunidad.id}> 
+                        <Titulo className={comunidad.categoria}>
                             {comunidad.titulo}
                         </Titulo>
                         <Categoria>

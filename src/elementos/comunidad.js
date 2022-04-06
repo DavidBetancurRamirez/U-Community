@@ -41,11 +41,18 @@ const ContenedorTitulo = styled.div`
     height: 80px;
     display: flex;
     justify-content: space-between;
+
+    .Compras {background-color: ${theme.categoria.compra};}
+    .Diversion {background-color: ${theme.categoria.diversion};}
+    .Estudio {background-color: ${theme.categoria.estudio};}
+    .Transporte {background-color: ${theme.categoria.transporte};}
+    .Trueque {background-color: ${theme.categoria.trueque};}    
+    .Venta {background-color: ${theme.categoria.venta};}
 `;
 
 const Titulo = styled.div`
     width: 700px;
-    background-color: ${theme.categoria.estudio};
+    background-color: ${theme.errorCategoria};
     border-radius: 20px;
     color: #fff;
     font-weight: 900;

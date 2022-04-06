@@ -30,21 +30,16 @@ const Index = () => {
           <Routes>
             <Route path="*" element={<Error404 />} />
             <Route path="/" element={<App cambiarAlerta={cambiarAlerta} cambiarEstadoAlerta={cambiarEstadoAlerta} /> } />
+            <Route path="/comunidad/:id" element={<Comunidad cambiarAlerta={cambiarAlerta} cambiarEstadoAlerta={cambiarEstadoAlerta} /> } />            
+
+            <Route path = "/login" element = {<Login cambiarAlerta={cambiarAlerta} cambiarEstadoAlerta={cambiarEstadoAlerta} />} />
+            <Route path = "/register" element = {<Register cambiarAlerta={cambiarAlerta} cambiarEstadoAlerta={cambiarEstadoAlerta} />} />
             
             <Route path="/formulario" element={
               <ProtectedRoutes>
                 <Formulario cambiarAlerta={cambiarAlerta} cambiarEstadoAlerta={cambiarEstadoAlerta} />
               </ProtectedRoutes>
             } />
-
-            <Route path="/comunidad" element={
-              <ProtectedRoutes>
-                <Comunidad cambiarAlerta={cambiarAlerta} cambiarEstadoAlerta={cambiarEstadoAlerta} />
-              </ProtectedRoutes>
-            } />
-
-            <Route path = "/login" element = {<Login cambiarAlerta={cambiarAlerta} cambiarEstadoAlerta={cambiarEstadoAlerta} />} />
-            <Route path = "/register" element = {<Register cambiarAlerta={cambiarAlerta} cambiarEstadoAlerta={cambiarEstadoAlerta} />} />
           </Routes>
 
           <Alerta 

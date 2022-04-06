@@ -3,7 +3,9 @@ import { collection, addDoc } from 'firebase/firestore'
 
 const agregarComunidad = ({titulo, categoria, objetivo, fechaMaxima, fechaCreacion, maxPersonas, uidUsuario}) => {
     const comentarios = [];
-    const participantes = 1;
+    const participantes = [{
+        usuario: uidUsuario
+    }];
 
     return addDoc(collection(db, "comunidades"), {
         titulo: titulo,
