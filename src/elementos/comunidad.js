@@ -188,7 +188,7 @@ const HeaderComentarios = styled.div`
     }
 `;
 
-const Comentarios = styled.div`
+const Coments = styled.div`
     padding: 10px;
     padding-top: 0;
     display: flex;
@@ -230,4 +230,4 @@ const TextoComentario = styled.div`
     text-align: justify;
 `;
 
-export {Contenedor, Regresar, ContenedorTitulo, Titulo, ContenedorInfo, Categoria, Fecha, Objetivo, Participacion, Participantes, Restricciones, Unirme, InputComentarios, Icono, ContenedorComentarios, HeaderComentarios, Comentarios, Comentario, Perfil, Nombre, TextoComentario}
+export {Contenedor, Regresar, ContenedorTitulo, Titulo, ContenedorInfo, Categoria, Fecha, Objetivo, Participacion, Participantes, Restricciones, Unirme, InputComentarios, Icono, ContenedorComentarios, HeaderComentarios, Coments, Comentario, Perfil, Nombre, TextoComentario}
