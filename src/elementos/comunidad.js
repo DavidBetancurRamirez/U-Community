@@ -147,6 +147,11 @@ const Unirme = styled.div`
     }
 `;
 
+const ParteComunidad = styled.div`
+    height: 50px;
+    margin-right: 10px;
+`;
+
 const InputComentarios = styled.div`
     margin-top: 20px;
     display: flex;
@@ -230,4 +235,9 @@ const TextoComentario = styled.div`
     text-align: justify;
 `;
 
-export {Contenedor, Regresar, ContenedorTitulo, Titulo, ContenedorInfo, Categoria, Fecha, Objetivo, Participacion, Participantes, Restricciones, Unirme, InputComentarios, Icono, ContenedorComentarios, HeaderComentarios, Coments, Comentario, Perfil, Nombre, TextoComentario}
+const Cargando = styled.img`
+    display: block;
+    margin: 10px auto;
+`;
+
+export {Contenedor, Regresar, ContenedorTitulo, Titulo, ContenedorInfo, Categoria, Fecha, Objetivo, Participacion, Participantes, Restricciones, Unirme, ParteComunidad, InputComentarios, Icono, ContenedorComentarios, HeaderComentarios, Coments, Comentario, Perfil, Nombre, TextoComentario, Cargando}

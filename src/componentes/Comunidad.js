@@ -3,49 +3,19 @@ import { Helmet } from 'react-helmet';
 import Header from "./Header";
 import { useNavigate, useParams } from 'react-router-dom';
 import {ReactComponent as IconoCalendario} from '../imagenes/IconoCalendario.svg'
-import {ReactComponent as IconoPersonas} from '../imagenes/IconoPersonas.svg'
-import {ReactComponent as IconoUnirme} from '../imagenes/IconoUnirme.svg'
-import {ReactComponent as IconoCaution} from '../imagenes/IconoCaution.svg'
 import {ReactComponent as IconoIzquierda} from '../imagenes/IconoIzquierda.svg'
-import {Contenedor, Regresar, ContenedorTitulo, Titulo, ContenedorInfo, Categoria, Fecha, Objetivo, Participacion, Participantes, Restricciones, Unirme} from '../elementos/comunidad'
+import {Contenedor, Regresar, ContenedorTitulo, Titulo, ContenedorInfo, Categoria, Fecha, Objetivo, Cargando} from '../elementos/comunidad'
 import useObtenerComunidad from "../hooks/useObtenerComunidad";
 import formatearFecha from "../funciones/formatearFecha";
-import { useAuth } from "../contextos/authContext";
-import agregarParticipante from "../firebase/agregarParticipante";
 import Comentarios from "../elementos/Comentarios";
+import SpinnerLoader from "../imagenes/SpinnerLoader.gif"
+import Actividad from "../elementos/Actividad";
 
-const Comunidad = ({cambiarEstadoAlerta, cambiarAlerta}) => {    
+const Comunidad = ({cambiarEstadoAlerta, cambiarAlerta}) => {
     const navigate = useNavigate();
-    const {user} = useAuth()
 
     const {id} = useParams();
     const [comunidad] = useObtenerComunidad(id)
-
-    const agregar = async () => {
-        if (user) {
-            if (comunidad.data().participantes.length >= comunidad.data().maxPersonas) {
-                cambiarEstadoAlerta(true)
-                cambiarAlerta({ tipo: "error", mensaje: "La comunidad a la que deseas unirte ya alcanzo su limite" })
-            } else {
-                try {
-                    await agregarParticipante({
-                        comunidadId: comunidad.id, 
-                        uidUsuario: user.uid,
-                        participantes: comunidad.data().participantes
-                    })
-                    cambiarEstadoAlerta(true)
-                    cambiarAlerta({ tipo: "exito", mensaje: "Ahora eres parte de esta comunidad" })
-                } catch (error) {
-                    cambiarEstadoAlerta(true)
-                    cambiarAlerta({ tipo: "error", mensaje: "Hubo un problema al unirse a la comunidad" })
-                }
-            }
-        } else {
-            navigate("/login");
-            cambiarEstadoAlerta(true)
-            cambiarAlerta({ tipo: "error", mensaje: "Para poder unirte a una comunidad es necesario iniciar sesión" })
-        }
-    }
 
     return (
     <>
@@ -54,11 +24,10 @@ const Comunidad = ({cambiarEstadoAlerta, cambiarAlerta}) => {
         </Helmet>
         <Header />
 
-        {comunidad &&
+        {comunidad ?
             <Contenedor>
                 <Regresar onClick={() => navigate("/")}>
-                    <IconoIzquierda />
-                    <p>Volver al Home</p>
+                    <IconoIzquierda /><p>Volver al Home</p>
                 </Regresar>
 
                 <ContenedorTitulo>
@@ -72,19 +41,13 @@ const Comunidad = ({cambiarEstadoAlerta, cambiarAlerta}) => {
 
                 <Objetivo>{comunidad.data().objetivo}</Objetivo>
 
-                <Participacion>
-                    <Participantes><IconoPersonas />Participantes: {comunidad.data().participantes.length}</Participantes>
-
-                    {comunidad.data().maxPersonas !== "0.00" && 
-                        <Restricciones>Maximo participantes: {parseFloat(comunidad.data().maxPersonas).toFixed(0)}<IconoCaution /></Restricciones>
-                    }
-
-                    <Unirme onClick={agregar}>Unirme + <IconoUnirme /></Unirme>                 
-                </Participacion>
+                <Actividad comunidad={comunidad} cambiarAlerta={cambiarAlerta} cambiarEstadoAlerta={cambiarEstadoAlerta} />
 
                 <Comentarios />
 
             </Contenedor>
+        :
+            <Cargando src={SpinnerLoader} alt="Cargando..." />
         }
     </>
     );
