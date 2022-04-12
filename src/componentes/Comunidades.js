@@ -115,7 +115,7 @@ const Buscador = styled.div`
     margin-bottom: 15px;
     display: flex;
     align-items: center;
-    z-index: 2;
+    
     height: 30px;
 
     button {
@@ -130,6 +130,11 @@ const Buscador = styled.div`
         opacity: .8;
         color: #fff;
         cursor: pointer;
+
+        @media (max-width: 450px) {
+            margin-left: 5px;
+            font-size: 13px;
+        }
     }
 
     @media (max-width: 450px) {
@@ -151,6 +156,7 @@ const Buscar = styled.div`
         border-radius: 30px;
         background-color: rgba(255, 255, 255, .5);
         padding: 5px 10px;
+        padding-right: 30px;
     }
 
     svg {
