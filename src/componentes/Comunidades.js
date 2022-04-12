@@ -2,7 +2,6 @@ import React from "react";
 import styled from 'styled-components';
 import {ReactComponent as IconoInfo} from '../imagenes/IconoInfo.svg'
 import {ReactComponent as IconoCalendario} from '../imagenes/IconoCalendario.svg'
-import {ReactComponent as IconoLupa} from '../imagenes/IconoLupa.svg'
 import theme from "../theme";
 import { useNavigate } from 'react-router-dom';
 import useObtenerComunidades from "../hooks/useObtenerComunidades";
@@ -18,6 +17,10 @@ const Contenedor = styled.div`
 
     @media (max-width: 900px) {
         width: 95%;
+    }
+
+    @media (max-width: 480px) {
+        margin-top: 15px;
     }
 `;
 const Main = styled.div`
@@ -110,59 +113,85 @@ const Cargando = styled.div`
     border-radius: 20px;
     background: transparent;
 `;
-const Buscador = styled.div`
-    margin-left: 20px;
-    margin-bottom: 15px;
+const ContenedorFiltros = styled.div`
     display: flex;
     align-items: center;
-    
-    height: 30px;
+    justify-content: center;
+    margin-bottom: 20px;
 
-    button {
-        margin-left: 15px;
-        border: none;
-        height: 100%;
-        border-radius: 10px;
-        font-size: 15px;
-        font-weight: 300;
-        padding: 2px 10px;
-        background-color: ${theme.azulU};
-        opacity: .8;
-        color: #fff;
-        cursor: pointer;
+    div {
+        display: flex;
+        position: relative;
+        background-color: #fff;
+        box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.1), 0 0 1px 0 rgba(24, 94, 224, 0.15), 0 6px 12px 0 rgba(24, 94, 224, 0.15);
+        padding: 10px;
+        border-radius: 100px;
+        z-index: 2;
 
-        @media (max-width: 450px) {
-            margin-left: 5px;
-            font-size: 13px;
+        input[id=radio-1]:checked ~ .glider {
+            transform: translateX(0);
+        }
+
+        input[id=radio-2]:checked ~ .glider {
+            transform: translateX(100%);
+        }
+
+        input[id=radio-3]:checked ~ .glider {
+            transform: translateX(200%);
+        }
+
+        .glider {
+            position: absolute;
+            display: flex;
+            height: 25px;
+            width: 200px;
+            background-color: #e6e6e6;
+            z-index: 1;
+            border-radius: 100px;
+            transition: 0.25s ease-out;
+
+            @media (max-width: 715px) {
+                width: 150px;
+            }
+
+            @media (max-width: 480px) {
+                width: 100px;
+            }
+        }
+
+        @media (max-width: 715px) {
+            padding: 5px;
         }
     }
+`;
+const Input = styled.input`
+    display: none;  
 
-    @media (max-width: 450px) {
-        margin-left: 0px;
+    &:checked + label {
+        color: ${theme.azulU};
     }
 `;
-const Buscar = styled.div`
-    width: 330px;
+const Label = styled.label`
     display: flex;
-    align-items: center; 
-    
-    input {
-        width: 100%;
-        margin-left: 2px;
+    align-items: center;
+    justify-content: center;
+    height: 25px;
+    width: 200px;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 100px;
+    cursor: pointer;
+    transition: color 0.15s ease-in;
+    z-index: 3;
+
+    @media (max-width: 715px) {
         font-size: 14px;
-        font-weight: 300;
-        outline: none;
-        border: none;
-        border-radius: 30px;
-        background-color: rgba(255, 255, 255, .5);
-        padding: 5px 10px;
-        padding-right: 30px;
+        width: 150px;
     }
 
-    svg {
-        margin-left: -25px;
-        width: 18px;
-        height: 18px;
+    @media (max-width: 480px) {
+        width: 100px;
+        font-size: 11px;
     }
 `;
 
@@ -173,12 +202,17 @@ const Comunidades = () => {
 
     return (
     <Contenedor>
-        <Buscador>
-            <Buscar>
-                <input placeholder="Buscar" /><IconoLupa />
-            </Buscar>
-            <button>Buscar</button>
-        </Buscador>
+        <ContenedorFiltros>
+            <div>
+                <Input type="radio" id="radio-1" name="tabs" defaultChecked />
+                    <Label htmlFor="radio-1">Mis participaciones</Label>
+                <Input type="radio" id="radio-2" name="tabs" />
+                    <Label htmlFor="radio-2">Mis comunidades</Label>
+                <Input type="radio" id="radio-3" name="tabs" />
+                    <Label htmlFor="radio-3">Todas</Label>
+                <span className="glider"></span>
+            </div>
+        </ContenedorFiltros>
 
         {comunidades.length > 0 ?
             <Main>
