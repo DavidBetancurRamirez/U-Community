@@ -22,6 +22,7 @@ const Comunidad = ({cambiarEstadoAlerta, cambiarAlerta}) => {
         <Helmet>
             <title>Comunidad - U Community</title>
         </Helmet>
+        
         <Header />
 
         {comunidad ?

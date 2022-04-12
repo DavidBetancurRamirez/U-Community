@@ -2,17 +2,26 @@ import React from "react";
 import styled from 'styled-components';
 import {ReactComponent as IconoInfo} from '../imagenes/IconoInfo.svg'
 import {ReactComponent as IconoCalendario} from '../imagenes/IconoCalendario.svg'
+import {ReactComponent as IconoLupa} from '../imagenes/IconoLupa.svg'
 import theme from "../theme";
 import { useNavigate } from 'react-router-dom';
 import useObtenerComunidades from "../hooks/useObtenerComunidades";
 import formatearFecha from "../funciones/formatearFecha";
 import SpinnerLoader from "../imagenes/SpinnerLoader.gif"
 
-const Main = styled.div`
+const Contenedor = styled.div`
     width: 80%;
-    max-width: 1500px;
     margin: auto;
     margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+
+    @media (max-width: 900px) {
+        width: 95%;
+    }
+`;
+const Main = styled.div`
+    width: 100%;
     display: flex;
     flex-wrap: wrap;
     border-radius: 20px;
@@ -38,6 +47,10 @@ const Comunidad = styled.div`
     .Transporte {background-color: ${theme.categoria.transporte};}
     .Trueque {background-color: ${theme.categoria.trueque};}    
     .Venta {background-color: ${theme.categoria.venta};}
+
+    @media (max-width: 375px) {
+        width: 200px;
+    }
 `;
 const Titulo = styled.div`
     background-color: ${theme.errorCategoria};
@@ -97,6 +110,55 @@ const Cargando = styled.div`
     border-radius: 20px;
     background: transparent;
 `;
+const Buscador = styled.div`
+    margin-left: 20px;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    z-index: 2;
+    height: 30px;
+
+    button {
+        margin-left: 15px;
+        border: none;
+        height: 100%;
+        border-radius: 10px;
+        font-size: 15px;
+        font-weight: 300;
+        padding: 2px 10px;
+        background-color: ${theme.azulU};
+        opacity: .8;
+        color: #fff;
+        cursor: pointer;
+    }
+
+    @media (max-width: 450px) {
+        margin-left: 0px;
+    }
+`;
+const Buscar = styled.div`
+    width: 330px;
+    display: flex;
+    align-items: center; 
+    
+    input {
+        width: 100%;
+        margin-left: 2px;
+        font-size: 14px;
+        font-weight: 300;
+        outline: none;
+        border: none;
+        border-radius: 30px;
+        background-color: rgba(255, 255, 255, .5);
+        padding: 5px 10px;
+    }
+
+    svg {
+        margin-left: -25px;
+        width: 18px;
+        height: 18px;
+    }
+`;
 
 const Comunidades = () => {
     const [comunidades] = useObtenerComunidades();
@@ -104,7 +166,15 @@ const Comunidades = () => {
     const navigate = useNavigate()
 
     return (
-        comunidades.length > 0 ?
+    <Contenedor>
+        <Buscador>
+            <Buscar>
+                <input placeholder="Buscar" /><IconoLupa />
+            </Buscar>
+            <button>Buscar</button>
+        </Buscador>
+
+        {comunidades.length > 0 ?
             <Main>
                 {comunidades.map((comunidad) => (
                     <Comunidad onClick={() => navigate(`/comunidad/${comunidad.id}`)} key={comunidad.id} id={comunidad.id}> 
@@ -129,6 +199,8 @@ const Comunidades = () => {
             <Cargando>
                 <img src={SpinnerLoader} alt="Cargando..." />
             </Cargando>
+        }
+    </Contenedor>
     );
 }
  

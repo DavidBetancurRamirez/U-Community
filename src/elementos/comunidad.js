@@ -8,7 +8,6 @@ const Contenedor = styled.div`
     margin: 30px auto;
     flex-direction: column;
 `;
-
 const Regresar = styled.div`
   background-color: #fff;
   margin-bottom: 10px;
@@ -36,7 +35,6 @@ const Regresar = styled.div`
     opacity: .8;
   }
 `;
-
 const ContenedorTitulo = styled.div`
     height: 80px;
     display: flex;
@@ -49,7 +47,6 @@ const ContenedorTitulo = styled.div`
     .Trueque {background-color: ${theme.categoria.trueque};}    
     .Venta {background-color: ${theme.categoria.venta};}
 `;
-
 const Titulo = styled.div`
     width: 700px;
     background-color: ${theme.errorCategoria};
@@ -61,12 +58,10 @@ const Titulo = styled.div`
     align-items: center;
     justify-content: center;
 `;
-
 const ContenedorInfo = styled.div`
     width: 300px;
     margin-left: 50px;
 `;
-
 const Categoria = styled.div`
     background-color: ${theme.grisOscuro};
     height: 40px;
@@ -77,7 +72,6 @@ const Categoria = styled.div`
     font-weight: 600;
     font-size: 18px;
 `;
-
 const Fecha = styled.div`
     background-color: #fff;
     height: 40px;
@@ -91,7 +85,6 @@ const Fecha = styled.div`
         height: 22px;
     }
 `;
-
 const Objetivo = styled.div`
     background-color: #DEE8D5;
     padding: 10px;
@@ -100,7 +93,6 @@ const Objetivo = styled.div`
     min-height: 200px;
     overflow: auto;
 `;
-
 const Participacion = styled.div`
     height: 50px;
     background-color: #A7C4C2;
@@ -115,7 +107,6 @@ const Participacion = styled.div`
         font-size: 15px;
     }
 `;
-
 const Participantes = styled.div`
     svg {
         height: 40px;
@@ -123,13 +114,11 @@ const Participantes = styled.div`
         margin: 10px;
     }
 `;
-
 const Restricciones = styled.div`
     svg {
         margin: 0px 10px;
     }
 `;
-
 const Unirme = styled.div`
     cursor: pointer;
     transition: 1.5s ease all;
@@ -146,12 +135,10 @@ const Unirme = styled.div`
         background-color: #DEE8D5;
     }
 `;
-
 const ParteComunidad = styled.div`
     height: 50px;
     margin-right: 10px;
 `;
-
 const InputComentarios = styled.div`
     margin-top: 20px;
     display: flex;
@@ -167,21 +154,18 @@ const InputComentarios = styled.div`
         padding: 5px;
     }
 `;
-
 const Icono = {
     width: "34px",
     height: "34px",
     cursor: "pointer",
     margin: "0 8px"
 }
-
 const ContenedorComentarios = styled.div`
     background-color: #FBF5F3;
     margin-top: 20px;
     padding: 5px;
     border-radius: 10px;
 `;
-
 const HeaderComentarios = styled.div`
     display: flex;
     align-items: center;
@@ -192,14 +176,12 @@ const HeaderComentarios = styled.div`
         margin: 0 5px;
     }
 `;
-
 const Coments = styled.div`
     padding: 10px;
     padding-top: 0;
     display: flex;
     flex-direction: column;
 `;
-
 const Comentario = styled.div`
     display: flex;
     flex-direction: row;
@@ -207,7 +189,6 @@ const Comentario = styled.div`
     border-bottom: 1px dashed ${theme.grisOscuro};
     margin-top: 10px;
 `;
-
 const Perfil = styled.div`
     width: 28px;
     height: 28px;
@@ -219,14 +200,12 @@ const Perfil = styled.div`
         height: 28px;
     }
 `;
-
 const Nombre = styled.h5`
     font-weight: 600;
     font-size: 15px;
     display: inline-block;
     margin-right: 10px;
 `;
-
 const TextoComentario = styled.div`
     margin-left: 5px;
     font-size: 14px;
@@ -234,7 +213,6 @@ const TextoComentario = styled.div`
     display: inline-block;
     text-align: justify;
 `;
-
 const Cargando = styled.img`
     display: block;
     margin: 10px auto;

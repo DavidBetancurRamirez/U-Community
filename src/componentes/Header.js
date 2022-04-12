@@ -13,6 +13,12 @@ const General = styled.div`
     opacity: 0.8;
     display: flex;
     justify-content: space-between;
+    margin-bottom: 15px;
+
+    @media (max-width: 900px) {
+        height: 70px;
+        margin-bottom: 10px;
+    }
 `;
 const ContTitulo = styled.div`
     display: flex;
@@ -29,6 +35,11 @@ const Imagen = styled.div`
         vertical-align: top;
         width: 100%;
     }
+
+    @media (max-width: 900px) {
+        height: 70px;
+        width: 70px;
+    }
 `;
 const Titulo = styled.div`
     display: flex;
@@ -38,6 +49,10 @@ const Titulo = styled.div`
     margin-left: 10px;
     align-items: center;
     text-shadow: 2px 5px 15px;
+
+    @media (max-width: 500px) {
+        font-size: 18px;
+    }
 `;
 const Sesion = styled.div`
     display: flex;
@@ -45,6 +60,10 @@ const Sesion = styled.div`
     justify-content: center;
     align-items: flex-end;
     flex-direction: column;
+
+    @media (max-width: 900px) {
+        display: none;
+    }
 `;
 const Usuario = styled.div`
     display: flex;
@@ -78,7 +97,6 @@ const CerrarSesion = styled.p`
 `;
 
 const Header = ({cambiarEstadoAlerta, cambiarAlerta}) => {
-
     const {user, logout, loading} = useAuth()
 
     const navigate = useNavigate();
@@ -102,6 +120,7 @@ const Header = ({cambiarEstadoAlerta, cambiarAlerta}) => {
                 </Imagen>
                 <Titulo>U Community</Titulo>
             </ContTitulo>
+
             {!loading &&
                 <Sesion>
                     {user ?
