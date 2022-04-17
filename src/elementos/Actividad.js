@@ -4,7 +4,7 @@ import {ReactComponent as IconoUnirme} from '../imagenes/IconoUnirme.svg'
 import {ReactComponent as IconoCaution} from '../imagenes/IconoCaution.svg'
 import agregarParticipante from "../firebase/agregarParticipante";
 import { useAuth } from "../contextos/authContext";
-import {Participacion, Participantes, Restricciones, Unirme, ParteComunidad} from "./comunidad"
+import {Participacion, Participantes, Restricciones, Unirme, ParteComunidad} from "../estilos/comunidad"
 import { useNavigate } from 'react-router-dom';
 
 
@@ -42,9 +42,11 @@ const Actividad = ({comunidad, cambiarEstadoAlerta, cambiarAlerta}) => {
     }
 
     useEffect(() => {
-        for (let i=0;i<comunidad.data().participantes.length;i++) {
-            if (comunidad.data().participantes[i] === user.uid) {
-                cambiarSuscrito(true)
+        if(user) {
+            for (let i=0;i<comunidad.data().participantes.length;i++) {
+                if (comunidad.data().participantes[i] === user.uid) {
+                    cambiarSuscrito(true)
+                }
             }
         }
     }, [comunidad, user])

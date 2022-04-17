@@ -1,7 +1,4 @@
 // Funcion inicia firebase
-// // import firebase from 'firebase/compat/app'
-// // import 'firebase/compat/firestore'
-
 import { initializeApp } from "firebase/app"
 import { getFirestore } from "firebase/firestore";
 import { getAuth } from "firebase/auth"
@@ -22,12 +19,8 @@ const firebaseConfig = {
   appId: process.env.REACT_APP_FIREBASE_APP_ID
 };
 
-// // firebase.initializeApp(firebaseConfig);
-
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-// // const db = firebase.firestore()
-
 const db = getFirestore();
 const auth = getAuth(app);
 const provider  = new GoogleAuthProvider();

@@ -5,7 +5,7 @@ import {ReactComponent as IconoCalendario} from '../imagenes/IconoCalendario.svg
 import {ReactComponent as IconoIzquierda} from '../imagenes/IconoIzquierda.svg'
 import Dates from '../elementos/Dates'
 import getUnixTime from 'date-fns/getUnixTime'
-import {Contenedor, CreaComunidad, Form, TitCat, Titulo, Categoria, Enunciado, InputTitulo, Objetivo, InputObjetivo, Ajustes, Fecha, Personas, InputPersonas, Ilimitado, Regresar, Boton, Botones} from '../elementos/formulario'
+import {Contenedor, CreaComunidad, Form, TitCat, Titulo, Categoria, Enunciado, InputTitulo, Objetivo, InputObjetivo, Ajustes, Fecha, Personas, InputPersonas, Ilimitado, Regresar, Boton, Botones} from '../estilos/formulario'
 import agregarComunidad from "../firebase/agregarComunidad";
 import { useNavigate } from 'react-router-dom';
 import Header from "./Header";

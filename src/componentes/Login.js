@@ -1,25 +1,30 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Helmet } from 'react-helmet';
 import { useAuth } from "../contextos/authContext";
 import { useNavigate } from "react-router-dom";
 import LogoGoogle from '../imagenes/LogoGoogle.svg.png'
-import {Contenedor, ContGoogle, BotonSesionGoogle, Formulario, Input, Label, Boton, FooterForm, SinRegistrar, SinCuenta} from "../elementos/inicioRegistro"
+import {Contenedor, ContGoogle, BotonSesionGoogle, Formulario, Input, Label, Boton, FooterForm, SinRegistrar, SinCuenta} from "../estilos/inicioRegistro"
 
 const Login = ({cambiarEstadoAlerta, cambiarAlerta}) => {
-
+    
     const [user, setUser] = useState({
         email: "",
         password: "",
     });
-    const { login, loginWithGoogle, resetPasword } = useAuth()
+    const { login, loginWithGoogle, resetPasword, redirectResult } = useAuth()
     const navigate = useNavigate()
 
     const handleChange = ({target: {name, value}}) => {
         setUser({...user, [name]: value})
     };
 
+    useEffect(() => {
+        redirectResult()
+    }, [redirectResult])
+
     const handleSubmit = async (e) => {
         e.preventDefault();
+        
         try {
             await login(user.email, user.password);
             navigate('/');
@@ -31,13 +36,31 @@ const Login = ({cambiarEstadoAlerta, cambiarAlerta}) => {
 
     const handleGoogleSignin = async() =>{
         try{
+            console.log("Antes")
             await loginWithGoogle()
+            console.log("Despues")
             navigate('/');
             cambiarEstadoAlerta(true)
             cambiarAlerta({ tipo: "exito", mensaje: "Inicio de sesión con Google exitoso" })            
         }catch (error) {
             cambiarEstadoAlerta(true)
             cambiarAlerta({ tipo: "error", mensaje: error.message })
+            console.log(error)
+        }
+    };
+
+    const handleGoogleSigninCont = async() =>{
+        if (window.innerWidth <= 1000) {
+            try{
+                await loginWithGoogle()
+                navigate('/');
+                cambiarEstadoAlerta(true)
+                cambiarAlerta({ tipo: "exito", mensaje: "Inicio de sesión con Google exitoso" })            
+            }catch (error) {
+                cambiarEstadoAlerta(true)
+                cambiarAlerta({ tipo: "error", mensaje: error.message })
+                console.log(error)
+            }
         }
     };
 
@@ -64,10 +87,10 @@ const Login = ({cambiarEstadoAlerta, cambiarAlerta}) => {
         </Helmet>   
 
         <Contenedor>
-            <ContGoogle>
-                <p>Inicia o registrate con</p>
+            <ContGoogle onClick={handleGoogleSigninCont}>
+                <p>Inicia o registrate con <span>sesion de google</span></p>
                 <BotonSesionGoogle onClick={handleGoogleSignin} title="Iniciar sesion con Google">                    
-                    <img src={LogoGoogle} alt="Logo google" />Sesion de Google
+                    <img src={LogoGoogle} alt="Logo google" /><span>Sesión de Google</span>
                 </BotonSesionGoogle>                
             </ContGoogle>
 
@@ -101,7 +124,7 @@ const Login = ({cambiarEstadoAlerta, cambiarAlerta}) => {
                     Iniciar Sesión
                 </Boton>                
                 
-                <FooterForm>         
+                <FooterForm>
                     <a href="#!" onClick={handleResetPasword}>¿Olvidaste la contraseña?</a>
                     <SinRegistrar onClick={() => navigate("/")}>Acceder sin iniciar sesión</SinRegistrar>
                     <SinCuenta>
@@ -110,7 +133,7 @@ const Login = ({cambiarEstadoAlerta, cambiarAlerta}) => {
                     </SinCuenta>
                 </FooterForm>  
             </Formulario>                            
-        </Contenedor>        
+        </Contenedor>
     </>
     );
 }

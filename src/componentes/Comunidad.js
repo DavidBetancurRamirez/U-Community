@@ -4,7 +4,7 @@ import Header from "./Header";
 import { useNavigate, useParams } from 'react-router-dom';
 import {ReactComponent as IconoCalendario} from '../imagenes/IconoCalendario.svg'
 import {ReactComponent as IconoIzquierda} from '../imagenes/IconoIzquierda.svg'
-import {Contenedor, Regresar, ContenedorTitulo, Titulo, ContenedorInfo, Categoria, Fecha, Objetivo, Cargando} from '../elementos/comunidad'
+import {Contenedor, Regresar, ContenedorTitulo, Titulo, ContenedorInfo, Categoria, Fecha, Objetivo, Cargando} from '../estilos/comunidad'
 import useObtenerComunidad from "../hooks/useObtenerComunidad";
 import formatearFecha from "../funciones/formatearFecha";
 import Comentarios from "../elementos/Comentarios";

@@ -8,6 +8,12 @@ const Contenedor = styled.div`
     box-sizing: border-box;
     box-shadow: 0 15px 25px rgba(0,0,0,.6);
     border-radius: 10px;
+
+    @media (max-width: 1000px) {
+        flex-direction: column;
+        width: 100%;
+        margin: 5px auto;
+    }
 `;
 const ContGoogle = styled.div`
     background-color: ${theme.azulU};
@@ -20,12 +26,43 @@ const ContGoogle = styled.div`
     height: 400px;   
     border-radius: 10px 0 0 10px; 
     border-right: 1px dashed #fff;
+    font-weight: 400;
 
     p {
         color: #fff;
-        font-weight: 300;
         font-size: 16px;
-        margin-bottom: 5px;
+    }
+
+    span {
+        display: none;
+    }
+
+    @media (max-width: 1000px) {
+        border-radius: 10px 10px 0 0; 
+        border-right: none;
+        height: 50px;
+        width: 100%;
+        flex-direction: row-reverse;
+        justify-content: center;
+        align-items: center;
+        background-color: #fff;
+        cursor: pointer;
+        transition: 1s ease all;
+        
+        &:hover {
+            background-color: ${theme.grisOscuro};
+        }
+
+        p {
+            font-size: 14px;
+            color: #000;
+        }
+
+        span {
+            display: inline-block;
+            font-size: 14px;
+            color: #000;
+        }
     }
 `;
 const BotonSesionGoogle = styled.button`
@@ -49,6 +86,21 @@ const BotonSesionGoogle = styled.button`
     &:hover {
         background-color: ${theme.grisOscuro};
     }
+    
+    span {
+        display: inline-block;
+        font-weight: 300;
+    }
+
+    @media (max-width: 1000px) {
+        &:hover {
+            background-color: ${theme.grisOscuro};
+        }
+        
+        span {
+            display: none;
+        }
+    }
 `;
 const Formulario = styled.form`
     display: flex;
@@ -70,6 +122,11 @@ const Formulario = styled.form`
     div {
         position: relative;
         color: #fff;
+    }
+
+    @media (max-width: 1000px) {
+        width: 100%;
+        border: none;
     }
 `;
 const Input = styled.input`
@@ -132,7 +189,19 @@ const FooterForm = styled.div`
             text-decoration: none;
             color: #000;
         }
-    }    
+    }   
+    
+    @media (max-width: 1000px) {
+        flex-direction: column;
+        align-items: center;
+
+        a {
+            margin-bottom: 5px;
+            font-size: 16px;
+            width: 100%;
+            text-align: center;
+        }
+    }
 `;
 const SinRegistrar = styled.p`
     color: #c4c4c4;
@@ -142,6 +211,11 @@ const SinRegistrar = styled.p`
 
     &:hover {
         text-decoration: underline;
+    }
+
+    @media (max-width: 1000px) {
+        font-size: 16px;
+        margin-bottom: 10px;
     }
 `;
 const SinCuenta = styled.div`
@@ -167,6 +241,11 @@ const SinCuenta = styled.div`
             text-decoration: underline;
         }
     }
+
+    @media (max-width: 1000px) {
+        width: 100%;
+        justify-content: flex-end;
+    } 
 `;
 const ContenedorR = styled.div`
     width: 500px;
@@ -176,6 +255,10 @@ const ContenedorR = styled.div`
     box-sizing: border-box;
     box-shadow: 0 15px 25px rgba(0,0,0,.6);
     border-radius: 10px;
+
+    @media (max-width: 1000px) {
+        margin: 10px auto;
+    }
 `;
 const ContGoogleR = styled.div`
     display: flex;

@@ -4,7 +4,7 @@ import { useAuth } from "../contextos/authContext";
 import { useNavigate } from "react-router-dom";
 import LogoGoogle from '../imagenes/LogoGoogle.svg.png'
 import {ReactComponent as IconoIzquierda} from '../imagenes/IconoIzquierda.svg'
-import {ContenedorR, ContGoogleR, BotonSesionGoogleR, FormularioR, Input, Label, Boton, FooterFormR, SinRegistrarR} from "../elementos/inicioRegistro"
+import {ContenedorR, ContGoogleR, BotonSesionGoogleR, FormularioR, Input, Label, Boton, FooterFormR, SinRegistrarR} from "../estilos/inicioRegistro"
 
 const Register = ({cambiarEstadoAlerta, cambiarAlerta}) => {
 
@@ -17,9 +17,7 @@ const Register = ({cambiarEstadoAlerta, cambiarAlerta}) => {
 
     const handleGoogleSignin = async() =>{
         try{
-            console.log("Hola")
             await loginWithGoogle()
-            console.log("chao")
             navigate('/');
             cambiarEstadoAlerta(true)
             cambiarAlerta({ tipo: "exito", mensaje: "Usuario creado con exito" })            

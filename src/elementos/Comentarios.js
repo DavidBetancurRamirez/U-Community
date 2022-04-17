@@ -1,5 +1,5 @@
 import React from "react";
-import {InputComentarios, Icono, ContenedorComentarios, HeaderComentarios, Coments, Comentario, Perfil, Nombre, TextoComentario} from "./comunidad";
+import {InputComentarios, Icono, ContenedorComentarios, HeaderComentarios, Coments, Comentario, Perfil, Nombre, TextoComentario} from "../estilos/comunidad";
 import {ReactComponent as IconoComentario} from '../imagenes/IconoComentario.svg'
 import {ReactComponent as IconoPerfil} from '../imagenes/IconoPerfil.svg'
 
