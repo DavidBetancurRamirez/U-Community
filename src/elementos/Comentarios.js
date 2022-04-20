@@ -15,16 +15,16 @@ const Comentarios = () => {
 
         <ContenedorComentarios>
             <HeaderComentarios><IconoComentario />Comentarios...</HeaderComentarios>
+        
+        {/* preguntar si hay comentarios */}
             <Coments>
+                {/* aqui el .map */}
                 <Comentario>
                     <Perfil><IconoPerfil /></Perfil>
                     <TextoComentario><Nombre>Pepito Perez</Nombre>Genial!! asi no perdere el semestre</TextoComentario>
                 </Comentario>
-                <Comentario>
-                    <Perfil><IconoPerfil /></Perfil>
-                    <TextoComentario><Nombre>Pepito Perez</Nombre>Genial!! asi no perdere el semestre Genial!! asi no perdere el semestre Genial!! asi no perdere el semestre Genial!! asi no perdere el semestre Genial!! asi no perdere el semestre Genial!! asi no perdere el semestre Genial!! asi no perdere el semestre Genial!! asi no perdere el semestre Genial!! asi no perdere el semestre</TextoComentario>
-                </Comentario>
             </Coments>
+            
         </ContenedorComentarios>
     </>
     );
