@@ -9,7 +9,7 @@ const Contenedor = styled.div`
     flex-direction: column;
 
     @media (max-width: 900px) {
-        width: 95%;
+        width: 100%;
     }
 
     @media (max-width: 480px) {
@@ -187,5 +187,24 @@ const Label = styled.label`
         font-size: 11px;
     }
 `;
+const Crear = styled.div`
+    display: none;
 
-export {Contenedor, Main, Comunidad, Titulo, Categoria, Objetivo, Info, Fecha, Cargando, ContenedorFiltros, Input, Label}
+    @media (max-width: 900px) {
+        display: block;
+        position: fixed;
+        bottom: 5px;
+        right: 5px;
+        width: 30px;
+        height: 30px;
+        padding: 1px;
+        border-radius: 50%;
+        background-color: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+    }
+`;
+
+export {Contenedor, Main, Comunidad, Titulo, Categoria, Objetivo, Info, Fecha, Cargando, ContenedorFiltros, Input, Label, Crear}

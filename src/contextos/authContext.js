@@ -44,21 +44,21 @@ export function AuthProvider ({children}) {
     }
 
     const redirectResult = async () => {
-        console.log("...")
+        /// console.log("...")
         await getRedirectResult(auth)
-        .then((result) => {
-            console.log("asldjniosadn")
-            // This gives you a Google Access Token. You can use it to access Google APIs.
-            const credential = GoogleAuthProvider.credentialFromResult(result);
-            const token = credential.accessToken;
+        // .then((result) => {
+        //     console.log("asldjniosadn")
+        //     // This gives you a Google Access Token. You can use it to access Google APIs.
+        //     const credential = GoogleAuthProvider.credentialFromResult(result);
+        //     const token = credential.accessToken;
 
-            // The signed-in user info.
-            const user = result.user;
-            console.log(user)
-            console.log(token)
-        }).catch((error) => {
-            console.log(error)
-        });
+        //     // The signed-in user info.
+        //     const user = result.user;
+        //     console.log(user)
+        //     console.log(token)
+        // }).catch((error) => {
+        //     console.log(error)
+        // });
     }
 
     useEffect(() => {

@@ -52,7 +52,12 @@ const ContenedorAlerta = styled.div`
         box-shadow: 0px 0px 15px rgba(0,0,0,.1);
         text-align: center;
         font-size: 14px;
+
+        @media (max-width: 500px) {
+            padding: 14px 20px;
+        }
     }
+
 `;
 
 const Alerta = ({tipo, mensaje, estadoAlerta, cambiarEstadoAlerta}) => {

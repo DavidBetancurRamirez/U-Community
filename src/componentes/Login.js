@@ -88,7 +88,7 @@ const Login = ({cambiarEstadoAlerta, cambiarAlerta}) => {
 
         <Contenedor>
             <ContGoogle onClick={handleGoogleSigninCont}>
-                <p>Inicia o registrate con <span>sesion de google</span></p>
+                <p>Inicia o registrate con <span>sesión de google</span></p>
                 <BotonSesionGoogle onClick={handleGoogleSignin} title="Iniciar sesion con Google">                    
                     <img src={LogoGoogle} alt="Logo google" /><span>Sesión de Google</span>
                 </BotonSesionGoogle>                

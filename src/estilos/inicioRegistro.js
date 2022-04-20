@@ -11,8 +11,12 @@ const Contenedor = styled.div`
 
     @media (max-width: 1000px) {
         flex-direction: column;
-        width: 100%;
+        width: 80%;
         margin: 5px auto;
+    }
+
+    @media (max-width: 700px) {
+        width: 100%;
     }
 `;
 const ContGoogle = styled.div`
@@ -192,12 +196,11 @@ const FooterForm = styled.div`
     }   
     
     @media (max-width: 1000px) {
-        flex-direction: column;
+        flex-direction: column-reverse;
         align-items: center;
 
         a {
             margin-bottom: 5px;
-            font-size: 16px;
             width: 100%;
             text-align: center;
         }
@@ -214,7 +217,6 @@ const SinRegistrar = styled.p`
     }
 
     @media (max-width: 1000px) {
-        font-size: 16px;
         margin-bottom: 10px;
     }
 `;
@@ -245,6 +247,7 @@ const SinCuenta = styled.div`
     @media (max-width: 1000px) {
         width: 100%;
         justify-content: flex-end;
+        margin-bottom: 20px;
     } 
 `;
 const ContenedorR = styled.div`
@@ -256,8 +259,9 @@ const ContenedorR = styled.div`
     box-shadow: 0 15px 25px rgba(0,0,0,.6);
     border-radius: 10px;
 
-    @media (max-width: 1000px) {
+    @media (max-width: 650px) {
         margin: 10px auto;
+        width: 100%;
     }
 `;
 const ContGoogleR = styled.div`
@@ -318,6 +322,10 @@ const FormularioR = styled.form`
     div {
         position: relative;
         color: #fff;
+    }
+
+    @media (max-width: 650px) {
+        width: 100%;
     }
 `;
 const Boton = styled.a`
@@ -462,7 +470,15 @@ const FooterFormR = styled.div`
             opacity: 0.8;
             border-bottom: 1px solid #000;
         }
-    }    
+    }   
+    
+    @media (max-width: 470px) {
+        flex-direction: column;
+
+        p {
+            display: none;
+        }
+    }
 `;
 const SinRegistrarR = styled.p`
     font-size: 14px;
