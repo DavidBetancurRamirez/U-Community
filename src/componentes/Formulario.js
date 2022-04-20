@@ -165,7 +165,7 @@ const Formulario = ({cambiarEstadoAlerta, cambiarAlerta}) => {
           </Ajustes>
 
           <Botones>
-            <div></div>
+            <div className="vacio"></div>
             <Boton type="submit">Crear Comunidad</Boton>
             <Regresar onClick={() => navigate("/")}>
               <IconoIzquierda />

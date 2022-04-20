@@ -40,6 +40,14 @@ const ContenedorInput = styled.div`
         display: flex;
         align-items: center;
         justify-content: center;
+
+        @media (max-width: 900px) {
+          margin-left: 10px;
+        }
+
+        @media (max-width: 500px) {
+          width: 200px;
+        }
     }
 
     div {

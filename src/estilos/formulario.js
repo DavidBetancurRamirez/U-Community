@@ -13,12 +13,21 @@ const Contenedor = styled.div`
     outline: none;
     padding: 5px;
   }
+
+  @media (max-width: 1050px) {
+    width: 100%;
+    padding: 0 20px;
+  }
 `;
 
 const CreaComunidad = styled.h2`
   font-weight: bold;
   text-align: center;
   font-size: 25px;
+
+  @media (max-width: 1050px) {
+    font-size: 20px;
+  }
 `;
 
 const Form = styled.form`
@@ -32,6 +41,14 @@ const TitCat = styled.div`
   margin-top: 45px;
   margin-bottom: 30px;
   justify-content: space-between;
+
+  @media (max-width: 1050px) {
+    margin-top: 30px;
+  }
+
+  @media (max-width: 750px) {
+    flex-direction: column;
+  }
 `;
 
 const Titulo = styled.div`
@@ -56,6 +73,10 @@ const Titulo = styled.div`
 const Categoria = styled.div`
   flex-direction: row;
   z-index: 5;
+
+  @media (max-width: 750px) {
+    margin-top: 20px;
+  }
 `;
 
 const Enunciado = styled.h3`
@@ -72,6 +93,10 @@ const Enunciado = styled.h3`
 const InputTitulo = styled.input`
   width: 500px;
   height: 30px;
+
+  @media (max-width: 750px) {
+    width: 100%;
+  }
 `;
 
 const Objetivo = styled.div`
@@ -83,6 +108,12 @@ const InputObjetivo = styled.textarea`
   min-width: 1000px;
   max-width: 1000px;
   min-height: 150px;
+
+  @media (max-width: 1050px) {
+    min-width: 100%;
+    max-width: 100%;
+    min-height: 150px;
+  }
 `;
 
 const Ajustes = styled.div`
@@ -92,6 +123,15 @@ const Ajustes = styled.div`
 
   svg {
     margin: 0px 15px;
+  }
+
+  @media (max-width: 900px) {
+    flex-direction: column;
+    align-items: center;
+
+    svg {
+      display: none;
+    }
   }
 `;
 
@@ -103,6 +143,10 @@ const Fecha = styled.div`
   div {
     border-radius: 0 20px 0 20px;
   }
+
+  @media (max-width: 900px) {
+    margin-left: 0px;
+  }
 `;
 
 const Personas = styled.div`
@@ -110,6 +154,10 @@ const Personas = styled.div`
   margin-top: 30px;
   margin-right: 30px;
   display: flex;
+
+  @media (max-width: 900px) {
+    margin-right: 0px;
+  }
 `;
 
 const InputPersonas = styled.input`
@@ -138,9 +186,18 @@ const Botones = styled.div`
   justify-content: space-between;
   margin-top: 30px;
 
-  div {
+  .vacio {
     width: 100px;
     padding: 0px 5px;
+
+    @media (max-width: 900px) {
+      display: none;
+    }
+  }
+
+  @media (max-width: 900px) {
+    flex-direction: column;
+    align-items: center;
   }
 `;
 
@@ -156,6 +213,10 @@ const Boton = styled.button`
   font-size: 20px;
   color: #fff;  
   transition: 0.5s ease-out all;
+
+  @media (max-width: 520px) {
+    width: 90%;
+  }
 `;
 
 const Regresar = styled.div`
@@ -168,6 +229,7 @@ const Regresar = styled.div`
   border-radius: 15px;
   cursor: pointer;
   transition: .5s ease all;
+  padding-right: 5px;
 
   svg {
     height: 30px;
@@ -180,6 +242,10 @@ const Regresar = styled.div`
   &:hover {
     background-color: ${theme.grisOscuro};
     opacity: .8;
+  }
+
+  @media (max-width: 900px) {
+    margin-top: 20px;
   }
 `;
 

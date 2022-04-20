@@ -21,6 +21,15 @@ const Contenedor = styled.div`
   &:hover {
     background: ${theme.grisClaro};
   }
+
+  @media (max-width: 1050px) {
+      width: 150px;
+      padding-left: 2px;
+  }
+
+  @media (max-width: 750px) {
+      width: 200px;
+  }
 `;
 
 const OpcionSeleccionada = styled.div`
@@ -36,6 +45,10 @@ const OpcionSeleccionada = styled.div`
         height: 20px;
         fill: currentColor !important;
         color: ${theme.azulU};
+    }
+
+    @media (max-width: 1050px) {
+        font-size: 15px;
     }
 `;
 
