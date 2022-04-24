@@ -36,20 +36,29 @@ const Comunidad = styled.div`
     flex-shrink: 0;
     flex-grow: 1;
     cursor: pointer;
-
-    .Compras {background-color: ${theme.categoria.compra};}
-    .Diversion {background-color: ${theme.categoria.diversion};}
-    .Estudio {background-color: ${theme.categoria.estudio};}
-    .Transporte {background-color: ${theme.categoria.transporte};}
-    .Trueque {background-color: ${theme.categoria.trueque};}    
-    .Venta {background-color: ${theme.categoria.venta};}
-
+    
     @media (max-width: 375px) {
         width: 200px;
     }
 `;
 const Titulo = styled.div`
-    background-color: ${theme.errorCategoria};
+    background: ${(props) => {
+        if(props.tipo === 'Compras'){
+            return theme.categoria.compra;
+        } else if (props.tipo === 'Diversion') {
+            return theme.categoria.diversion;
+        } else if (props.tipo === 'Estudio') {
+            return theme.categoria.estudio;
+        } else if (props.tipo === 'Transporte') {
+            return theme.categoria.transporte;
+        } else if (props.tipo === 'Trueque') {
+            return theme.categoria.trueque;
+        } else if (props.tipo === 'Venta') {
+            return theme.categoria.venta;
+        } else {
+            return theme.errorCategoria;
+        }
+    }};
     display: flex;
     height: 50px;
     justify-content: center;

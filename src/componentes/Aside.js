@@ -4,6 +4,8 @@ import theme from '../theme';
 import {ReactComponent as IconoPlus} from '../imagenes/IconoPlus.svg'
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from "../contextos/authContext";
+import useObtenerMisComunidades from "../hooks/useObtenerMisComunidades";
+import useObtenerMisParticipaciones from "../hooks/useObtenerMisParticipaciones";
 
 const AsideBar = styled.div`
     margin-top: 0;
@@ -79,7 +81,10 @@ const ListaLi = styled.li`
 
 const Aside = ({cambiarEstadoAlerta, cambiarAlerta}) => {
     const navigate = useNavigate();
-    const {user} = useAuth()
+    const {user} = useAuth();
+
+    const [MisComunidades] = useObtenerMisComunidades();
+    const [MisParticipaciones] = useObtenerMisParticipaciones();
 
     const handleClick = () => {
         if(user) {
@@ -94,14 +99,17 @@ const Aside = ({cambiarEstadoAlerta, cambiarAlerta}) => {
     return (
         <AsideBar>
             <Menu>
-                <Titulo>Mis comunidades</Titulo>
-                <Lista>
-                    <ListaLi>Vendo libro</ListaLi>
-                    <ListaLi>Cálculo 1</ListaLi>
-                    <ListaLi>Cambio bata de laboratorio</ListaLi>
-                    <ListaLi>Vendo libro</ListaLi>
-                    <ListaLi>Cálculo 1</ListaLi>
-                    <ListaLi>Cambio bata de laboratorio</ListaLi>
+                <Titulo>Mis comunidades</Titulo>  
+                <Lista> 
+                    {user ? 
+                        <>                                  
+                            {MisComunidades.map((miComunidad) => (                            
+                                <ListaLi key={miComunidad.id} id={miComunidad.id}>{miComunidad.titulo}</ListaLi>
+                            ))}
+                        </> 
+                    :
+                        <p>Aun no has iniciado sesion</p>
+                    }
                 </Lista>
 
                 <Crear onClick={handleClick}>
@@ -115,9 +123,15 @@ const Aside = ({cambiarEstadoAlerta, cambiarAlerta}) => {
             <Menu>
                 <Titulo>Mis Participaciones</Titulo>
                 <Lista>
-                    <ListaLi>Salida paintball</ListaLi>
-                    <ListaLi>Taller de refuerzo</ListaLi>
-                    <ListaLi>Parcial geometría</ListaLi>  
+                    {user ? 
+                        <>                                  
+                            {MisParticipaciones.map((miParticipacion) => (                            
+                                <ListaLi key={miParticipacion.id} id={miParticipacion.id}>{miParticipacion.titulo}</ListaLi>
+                            ))}
+                        </> 
+                    :
+                        <p>Aun no has iniciado sesion</p>
+                    }
                 </Lista>
             </Menu>
         </AsideBar>
