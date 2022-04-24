@@ -39,17 +39,26 @@ const ContenedorTitulo = styled.div`
     height: 80px;
     display: flex;
     justify-content: space-between;
-
-    .Compras {background-color: ${theme.categoria.compra};}
-    .Diversion {background-color: ${theme.categoria.diversion};}
-    .Estudio {background-color: ${theme.categoria.estudio};}
-    .Transporte {background-color: ${theme.categoria.transporte};}
-    .Trueque {background-color: ${theme.categoria.trueque};}    
-    .Venta {background-color: ${theme.categoria.venta};}
 `;
 const Titulo = styled.div`
     width: 700px;
-    background-color: ${theme.errorCategoria};
+    background: ${(props) => {
+        if(props.tipo === 'Compras'){
+            return theme.categoria.compra;
+        } else if (props.tipo === 'Diversion') {
+            return theme.categoria.diversion;
+        } else if (props.tipo === 'Estudio') {
+            return theme.categoria.estudio;
+        } else if (props.tipo === 'Transporte') {
+            return theme.categoria.transporte;
+        } else if (props.tipo === 'Trueque') {
+            return theme.categoria.trueque;
+        } else if (props.tipo === 'Venta') {
+            return theme.categoria.venta;
+        } else {
+            return theme.errorCategoria;
+        }
+    }};
     border-radius: 20px;
     color: #fff;
     font-weight: 900;

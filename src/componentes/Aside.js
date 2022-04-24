@@ -17,6 +17,75 @@ const AsideBar = styled.div`
         display: none;
     }
 `;
+const Menu = styled.div`
+    width: 100%;
+    height: 220px;
+    background-color: #fff;
+    margin-bottom: 20px;
+`;
+const Titulo = styled.div`
+    padding: 15px 10px 10px 10px;
+    font-weight: 600;
+    text-align: center;
+`;
+const Lista = styled.ul`
+    padding: 0px 10px 10px 10px;
+    height: 125px;
+    width: 140px;
+    overflow: auto;
+
+    p {
+        font-weight: 300;
+        font-size: 15px;
+        text-align: center;
+    }
+`;
+const ListaLi = styled.li`
+    color: ${theme.azulU};
+    text-decoration: none;
+    font-size: 14px;
+    border-bottom: dashed 1px #000;
+    padding: 5px 0px;
+
+    &:hover {
+        cursor: pointer;
+        text-decoration: underline;
+        background-color: #f2f2f2;
+    }
+`;
+const InicioSinSesion = styled.div`
+    display: flex;
+    flex-direction: column;
+    font-weight: 300;
+    font-size: 16px;
+    text-align: center;
+
+    button {
+        box-shadow: 3px 4px 0px 0px #1564ad;
+        background:linear-gradient(to bottom, #09a4dd 5%, #6aa9e8 100%);
+        background-color:#09a4dd;
+        border-radius:5px;
+        border:1px solid #337bc4;
+        display:inline-block;
+        cursor:pointer;
+        color:#ffffff;
+        font-size:13px;
+        font-weight:400;
+        text-decoration:none;
+        text-shadow:0px 1px 0px #528ecc;
+        margin-top: 15px;
+
+        &:hover {
+            background:linear-gradient(to bottom, #6aa9e8 5%, #09a4dd 100%);
+	        background-color:#6aa9e8;
+        }
+
+        &:active {
+            position:relative;
+	        top:2px;
+        }
+    }
+`;
 const Crear = styled.div`
     float: right;
     margin-top: 5px;
@@ -48,36 +117,6 @@ const Plus = styled.div`
         width: 100%;
     }
 `;
-const Menu = styled.div`
-    width: 100%;
-    height: 220px;
-    background-color: #fff;
-    margin-bottom: 20px;
-`;
-const Titulo = styled.div`
-    padding: 15px 10px 10px 10px;
-    font-weight: 600;
-    text-align: center;
-`;
-const Lista = styled.ul`
-    padding: 0px 10px 10px 10px;
-    height: 125px;
-    width: 140px;
-    overflow: auto;
-`;
-const ListaLi = styled.li`
-    color: ${theme.azulU};
-    text-decoration: none;
-    font-size: 14px;
-    border-bottom: dashed 1px #000;
-    padding: 5px 0px;
-
-    &:hover {
-        cursor: pointer;
-        text-decoration: underline;
-        background-color: #f2f2f2;
-    }
-`;
 
 const Aside = ({cambiarEstadoAlerta, cambiarAlerta}) => {
     const navigate = useNavigate();
@@ -103,12 +142,18 @@ const Aside = ({cambiarEstadoAlerta, cambiarAlerta}) => {
                 <Lista> 
                     {user ? 
                         <>                                  
-                            {MisComunidades.map((miComunidad) => (                            
-                                <ListaLi key={miComunidad.id} id={miComunidad.id}>{miComunidad.titulo}</ListaLi>
-                            ))}
+                            {MisComunidades.length > 0 ? 
+                                <>
+                                    {MisComunidades.map((miComunidad) => (                            
+                                        <ListaLi key={miComunidad.id} id={miComunidad.id}>{miComunidad.titulo}</ListaLi>
+                                    ))}
+                                </>
+                            :
+                                <p>Aun no has creado ninguna comunidad</p>
+                            }
                         </> 
                     :
-                        <p>Aun no has iniciado sesion</p>
+                        <InicioSinSesion onClick={() => navigate("/login")}>Aun no has iniciado sesión<button>Inicia sesión AHORA</button></InicioSinSesion>
                     }
                 </Lista>
 
@@ -125,12 +170,18 @@ const Aside = ({cambiarEstadoAlerta, cambiarAlerta}) => {
                 <Lista>
                     {user ? 
                         <>                                  
-                            {MisParticipaciones.map((miParticipacion) => (                            
-                                <ListaLi key={miParticipacion.id} id={miParticipacion.id}>{miParticipacion.titulo}</ListaLi>
-                            ))}
+                            {MisParticipaciones.length > 0 ? 
+                                <>
+                                    {MisParticipaciones.map((miParticipacion) => (                            
+                                        <ListaLi key={miParticipacion.id} id={miParticipacion.id}>{miParticipacion.titulo}</ListaLi>
+                                    ))}
+                                </>
+                            :
+                                <p>Aun no haces parte de ninguna comunidad</p>
+                            }
                         </> 
                     :
-                        <p>Aun no has iniciado sesion</p>
+                        <InicioSinSesion onClick={() => navigate("/login")}>Aun no has iniciado sesión<button>Inicia sesión AHORA</button></InicioSinSesion>
                     }
                 </Lista>
             </Menu>

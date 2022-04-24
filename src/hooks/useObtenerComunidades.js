@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import { db } from "../firebase/firebaseConfig";
-import { collection, onSnapshot, query, orderBy, limit } from "firebase/firestore";
+import { collection, onSnapshot, query, orderBy } from "firebase/firestore";
 
 const useObtenerComunidades = () => {
     const [comunidades, cambiarComunidades] = useState([])
@@ -8,8 +8,7 @@ const useObtenerComunidades = () => {
     useEffect(() => {
         const consulta = query(
             collection(db, "comunidades"),
-            orderBy('fechaCreacion', 'desc'),
-            limit(10)
+            orderBy('fechaCreacion', 'desc')
         )
 
         const unsuscribe = onSnapshot(consulta, (snapshot) => {

@@ -1,15 +1,41 @@
-import {Main, Comunidad, Titulo, Categoria, Objetivo, Info, Fecha, Cargando} from "../estilos/comunidades"
+import React, { useEffect, useState } from "react";
+import {Main, Comunidad, Titulo, Categoria, Objetivo, Info, Fecha, Cargando, Sin} from "../estilos/comunidades"
 import useObtenerMisComunidades from "../hooks/useObtenerMisComunidades";
 import formatearFecha from "../funciones/formatearFecha";
 import {ReactComponent as IconoInfo} from '../imagenes/IconoInfo.svg'
 import {ReactComponent as IconoCalendario} from '../imagenes/IconoCalendario.svg'
 import { useNavigate } from 'react-router-dom';
 import SpinnerLoader from "../imagenes/SpinnerLoader.gif"
+import { useAuth } from "../contextos/authContext";
 
-const MisComunidades = () => {
+const MisComunidades = ({cambiarEstadoAlerta, cambiarAlerta}) => {
+    const [cargando, cambiarCargando] = useState(true);
     const [MisComunidades] = useObtenerMisComunidades();
 
     const navigate = useNavigate();
+    const {user} = useAuth();
+
+    useEffect(() => {
+        let tiempo
+
+        if(cargando === true){
+            tiempo = setTimeout(() => {
+                cambiarCargando(false)
+            }, 3000)
+        }
+
+        return(() => clearTimeout(tiempo))
+    }, [cargando, cambiarCargando, MisComunidades])
+
+    const handleClick = () => {
+        if(user) {
+            navigate("/formulario");
+        } else {
+            navigate("/login");
+            cambiarEstadoAlerta(true)
+            cambiarAlerta({ tipo: "error", mensaje: "Para poder crear una comunidad es necesario iniciar sesión" })
+        }
+    }
 
     return (
         MisComunidades.length > 0 ?
@@ -33,10 +59,29 @@ const MisComunidades = () => {
                     </Comunidad>
                 ))}               
             </Main>
-        :   
-            <Cargando>
-                <img src={SpinnerLoader} alt="Cargando..." />
-            </Cargando>          
+        :
+        <>
+            {user ?
+            <>
+                {cargando ? 
+                    <Cargando>
+                        <img src={SpinnerLoader} alt="Cargando..." />
+                    </Cargando>  
+                :
+                    <Main>
+                        <Sin>
+                            <p>Aun no has creado ninguna comunidad</p>
+                            <button onClick={handleClick}>Crea tu propia comunidad</button>
+                        </Sin>
+                    </Main>
+                } 
+            </>
+            :
+                <Main>
+                    <Sin>Antes debes iniciar sesión</Sin>
+                </Main>
+            }
+        </>                 
     );
 }
  

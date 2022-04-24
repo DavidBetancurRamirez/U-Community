@@ -215,5 +215,37 @@ const Crear = styled.div`
         z-index: 1000;
     }
 `;
+const Sin = styled.div`
+    margin: 20px auto;
 
-export {Contenedor, Main, Comunidad, Titulo, Categoria, Objetivo, Info, Fecha, Cargando, ContenedorFiltros, Input, Label, Crear}
+    p {
+        font-weight: 400;
+        font-size: 16px;
+        color: #212F3C;
+    }
+
+    button {
+        background-image: radial-gradient(circle at 7.7% 50%, #0067ff 0, #005fff 12.5%, #0055ff 25%, #4f4afd 37.5%, #783cf2 50%, #9429e6 62.5%, #ab02d8 75%, #bd00ca 87.5%, #cc00ba 100%);
+        border: none;
+        border-radius: 10px;
+        padding: 5px 10px;
+        margin: 20px;
+        cursor: pointer;
+        font-weight: 300;
+        font-size: 18px;
+        color: #fff;  
+        transition: 1s linear all;
+
+        &:hover {
+            color: #000;
+            background-image: radial-gradient(circle at 86.64% 71.15%, #0067ff 0, #005fff 12.5%, #0055ff 25%, #4f4afd 37.5%, #783cf2 50%, #9429e6 62.5%, #ab02d8 75%, #bd00ca 87.5%, #cc00ba 100%);
+        }
+
+        &:active {
+            position: relative;
+            top: 2px;
+        }
+    }
+`;
+
+export {Contenedor, Main, Comunidad, Titulo, Categoria, Objetivo, Info, Fecha, Cargando, ContenedorFiltros, Input, Label, Crear, Sin}

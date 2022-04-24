@@ -47,8 +47,8 @@ const ContenedorAlerta = styled.div`
             }
         }};
         color: #fff;
-        padding: 18px 30px; /* 20px 40px */
-        border-radius: 0.31rem; /* 5px */
+        padding: 18px 30px;
+        border-radius: 0.31rem;
         box-shadow: 0px 0px 15px rgba(0,0,0,.1);
         text-align: center;
         font-size: 14px;

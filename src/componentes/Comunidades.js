@@ -57,7 +57,7 @@ const Comunidades = ({cambiarEstadoAlerta, cambiarAlerta}) => {
             </ContenedorFiltros>
             
             {misParticipaciones && <MisParticipaciones />}               
-            {misComunidades && <MisComunidades />}
+            {misComunidades && <MisComunidades cambiarAlerta={cambiarAlerta} cambiarEstadoAlerta={cambiarEstadoAlerta} />}
             {todas && <TodasLasComunidades />}
             
         </Contenedor>
