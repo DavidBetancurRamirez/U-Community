@@ -217,6 +217,7 @@ const Crear = styled.div`
 `;
 const Sin = styled.div`
     margin: 20px auto;
+    text-align: center;
 
     p {
         font-weight: 400;
