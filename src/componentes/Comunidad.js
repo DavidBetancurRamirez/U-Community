@@ -32,7 +32,7 @@ const Comunidad = ({cambiarEstadoAlerta, cambiarAlerta}) => {
                 </Regresar>
 
                 <ContenedorTitulo>
-                    <Titulo className={comunidad.data().categoria}>{comunidad.data().titulo}</Titulo>
+                    <Titulo tipo={comunidad.data().categoria}>{comunidad.data().titulo}</Titulo>
 
                     <ContenedorInfo>
                         <Categoria>{comunidad.data().categoria}</Categoria>

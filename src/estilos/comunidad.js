@@ -3,10 +3,13 @@ import theme from '../theme'
 
 const Contenedor = styled.div`
     width: 1000px;
-    height: 100px;
     display: flex;  
     margin: 30px auto;
     flex-direction: column;
+
+    @media (max-width: 1100px) {
+        width: 95%;
+    }
 `;
 const Regresar = styled.div`
   background-color: #fff;
@@ -14,7 +17,6 @@ const Regresar = styled.div`
   margin-left: 15px;
   width: 170px;
   font-weight: 300;
-  font-size: 15px;
   height: 35px;
   display: flex;
   align-items: center;
@@ -34,14 +36,27 @@ const Regresar = styled.div`
     background-color: ${theme.grisOscuro};
     opacity: .8;
   }
+
+  @media (max-width: 650px) {
+      width: 150px;
+      
+      p {
+        font-size: 15px;
+      }
+    }
 `;
 const ContenedorTitulo = styled.div`
     height: 80px;
     display: flex;
     justify-content: space-between;
+
+  @media (max-width: 900px) {
+      flex-direction: column;
+      height: auto;
+  }
 `;
 const Titulo = styled.div`
-    width: 700px;
+    width: 70%;
     background: ${(props) => {
         if(props.tipo === 'Compras'){
             return theme.categoria.compra;
@@ -66,10 +81,32 @@ const Titulo = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+
+    @media (max-width: 900px) {
+        width: 100%;
+        padding: 15px 0;
+    }
+
+    @media (max-width: 650px) {
+        font-size: 18px;
+    }
 `;
 const ContenedorInfo = styled.div`
-    width: 300px;
+    width: 30%;
     margin-left: 50px;
+
+    @media (max-width: 900px) {
+        width: 100%;
+        margin-left: 0;
+        margin-top: 20px;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    @media (max-width: 650px) {
+        flex-direction: column;
+        margin-top: 15px;
+    }
 `;
 const Categoria = styled.div`
     background-color: ${theme.grisOscuro};
@@ -80,6 +117,15 @@ const Categoria = styled.div`
     justify-content: center;
     font-weight: 600;
     font-size: 18px;
+
+    @media (max-width: 900px) {
+        width: 48%;
+    }
+
+    @media (max-width: 650px) {
+        width: 100%;
+        font-size: 16px;
+    }
 `;
 const Fecha = styled.div`
     background-color: #fff;
@@ -92,6 +138,15 @@ const Fecha = styled.div`
     svg {
         width: 22px;
         height: 22px;
+    }
+
+    @media (max-width: 900px) {
+        width: 48%;
+    }
+
+    @media (max-width: 650px) {
+        width: 100%;
+        font-size: 15px;
     }
 `;
 const Objetivo = styled.div`
@@ -115,6 +170,11 @@ const Participacion = styled.div`
         align-items: center;
         font-size: 15px;
     }
+
+    @media (max-width: 800px) {
+        flex-direction: column;
+        height: auto;
+    }
 `;
 const Participantes = styled.div`
     svg {
@@ -122,10 +182,44 @@ const Participantes = styled.div`
         width: 40px;
         margin: 10px;
     }
+
+    @media (max-width: 800px) {
+        width: 80%;
+        border-bottom: 1px dashed  #000;
+        display: flex;
+        justify-content: center;
+
+        svg {
+            height: 30px;
+            width: 30px;
+        }
+    }
+
+    @media (max-width: 430px) {
+        width: 95%;
+    }
 `;
 const Restricciones = styled.div`
     svg {
         margin: 0px 10px;
+    }
+
+    @media (max-width: 800px) {
+        width: 80%;
+        border-bottom: 1px dashed  #000;
+        display: flex;
+        justify-content: center;
+        margin-top: 10px;
+        padding-bottom: 10px;
+
+        svg {
+            height: 25px;
+            width: 25px;
+        }
+    }
+
+    @media (max-width: 430px) {
+        width: 95%;
     }
 `;
 const Unirme = styled.div`
@@ -161,11 +255,15 @@ const InputComentarios = styled.div`
         border: 1px solid #fff;
         outline: none;
         padding: 5px;
+
+        @media (max-width: 800px) {
+            width: 90%;
+        }
     }
 `;
 const Icono = {
-    width: "34px",
-    height: "34px",
+    width: "32px",
+    height: "32px",
     cursor: "pointer",
     margin: "0 8px"
 }

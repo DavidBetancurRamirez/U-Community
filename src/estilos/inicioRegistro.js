@@ -150,6 +150,11 @@ const Input = styled.input`
         color: #ffff00;
         font-size: 12px;
     } 
+
+    &:-webkit-autofill, &:-webkit-autofill:hover, &:-webkit-autofill:focus {
+        -webkit-text-fill-color: #fff;
+        transition: background-color 5000s ease-in-out 0s;
+    }
 `;
 const Label = styled.label`
   position: absolute;

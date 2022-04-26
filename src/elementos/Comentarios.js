@@ -21,7 +21,11 @@ const Comentarios = () => {
                 {/* aqui el .map */}
                 <Comentario>
                     <Perfil><IconoPerfil /></Perfil>
-                    <TextoComentario><Nombre>Pepito Perez</Nombre>Genial!! asi no perdere el semestre</TextoComentario>
+                    <TextoComentario><Nombre>Pepito Perez</Nombre>Genial!! asi no perdere el semestre blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla </TextoComentario>
+                </Comentario>
+                <Comentario>
+                    <Perfil><IconoPerfil /></Perfil>
+                    <TextoComentario><Nombre>Pepito Perez</Nombre>Genial!! asi no perdere el semestre blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla </TextoComentario>
                 </Comentario>
             </Coments>
             
