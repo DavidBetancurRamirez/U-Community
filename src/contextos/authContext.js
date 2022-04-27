@@ -6,7 +6,7 @@ import {
     onAuthStateChanged,
     signOut,
     GoogleAuthProvider,
-    signInWithRedirect,
+    signInWithPopup,
     sendPasswordResetEmail,
     getRedirectResult
 } from 'firebase/auth';
@@ -36,7 +36,7 @@ export function AuthProvider ({children}) {
 
     const loginWithGoogle = () => {
         const googleProvider  = new GoogleAuthProvider()
-        return signInWithRedirect (auth, googleProvider)
+        return signInWithPopup (auth, googleProvider)
     }
 
     const resetPasword = (email) => {
@@ -44,21 +44,7 @@ export function AuthProvider ({children}) {
     }
 
     const redirectResult = async () => {
-        /// console.log("...")
         await getRedirectResult(auth)
-        // .then((result) => {
-        //     console.log("asldjniosadn")
-        //     // This gives you a Google Access Token. You can use it to access Google APIs.
-        //     const credential = GoogleAuthProvider.credentialFromResult(result);
-        //     const token = credential.accessToken;
-
-        //     // The signed-in user info.
-        //     const user = result.user;
-        //     console.log(user)
-        //     console.log(token)
-        // }).catch((error) => {
-        //     console.log(error)
-        // });
     }
 
     useEffect(() => {

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { Helmet } from 'react-helmet';
 import { useAuth } from "../contextos/authContext";
 import { useNavigate } from "react-router-dom";
@@ -11,16 +11,12 @@ const Login = ({cambiarEstadoAlerta, cambiarAlerta}) => {
         email: "",
         password: "",
     });
-    const { login, loginWithGoogle, resetPasword, redirectResult } = useAuth()
+    const { login, loginWithGoogle, resetPasword } = useAuth()
     const navigate = useNavigate()
 
     const handleChange = ({target: {name, value}}) => {
         setUser({...user, [name]: value})
     };
-
-    useEffect(() => {
-        redirectResult()
-    }, [redirectResult])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -36,9 +32,7 @@ const Login = ({cambiarEstadoAlerta, cambiarAlerta}) => {
 
     const handleGoogleSignin = async() =>{
         try{
-            console.log("Antes")
             await loginWithGoogle()
-            console.log("Despues")
             navigate('/');
             cambiarEstadoAlerta(true)
             cambiarAlerta({ tipo: "exito", mensaje: "Inicio de sesión con Google exitoso" })            
