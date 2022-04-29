@@ -21,6 +21,7 @@ const useObtenerComunidades = () => {
 
         return unsuscribe
     }, [])
+    
     return [comunidades];
 }
  

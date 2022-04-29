@@ -25,6 +25,7 @@ const useObtenerMisComunidades = () => {
             return unsuscribe
         }
     }, [user])
+    
     return [misComunidades];
 }
  

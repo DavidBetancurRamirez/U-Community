@@ -242,7 +242,7 @@ const ParteComunidad = styled.div`
     height: 50px;
     margin-right: 10px;
 `;
-const InputComentarios = styled.div`
+const InputComentarios = styled.form`
     margin-top: 20px;
     display: flex;
     justify-content: center;
@@ -259,6 +259,11 @@ const InputComentarios = styled.div`
         @media (max-width: 800px) {
             width: 90%;
         }
+    }
+
+    button {
+        border: none;
+        background-color: transparent;
     }
 `;
 const Icono = {
@@ -288,6 +293,14 @@ const Coments = styled.div`
     padding-top: 0;
     display: flex;
     flex-direction: column;
+
+    img {
+        width: 100px;
+        height: 100px;
+        background-color: #FBF5F3;
+        margin: auto;
+        margin-top: 20px;
+    }
 `;
 const Comentario = styled.div`
     display: flex;

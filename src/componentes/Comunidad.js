@@ -16,7 +16,7 @@ const Comunidad = ({cambiarEstadoAlerta, cambiarAlerta}) => {
 
     const {id} = useParams();
     const [comunidad] = useObtenerComunidad(id)
-
+    
     return (
     <>
         <Helmet>
@@ -27,6 +27,7 @@ const Comunidad = ({cambiarEstadoAlerta, cambiarAlerta}) => {
 
         {comunidad ?
             <Contenedor>
+
                 <Regresar onClick={() => navigate("/")}>
                     <IconoIzquierda /><p>Volver al Home</p>
                 </Regresar>
@@ -44,7 +45,9 @@ const Comunidad = ({cambiarEstadoAlerta, cambiarAlerta}) => {
 
                 <Actividad comunidad={comunidad} cambiarAlerta={cambiarAlerta} cambiarEstadoAlerta={cambiarEstadoAlerta} />
 
-                <Comentarios />
+                <div>{comunidad.data().nombreUsuario}</div>
+
+                <Comentarios comunidad={comunidad} cambiarAlerta={cambiarAlerta} cambiarEstadoAlerta={cambiarEstadoAlerta} />
 
             </Contenedor>
         :

@@ -18,6 +18,7 @@ const Formulario = ({cambiarEstadoAlerta, cambiarAlerta}) => {
   const [inputObjetivo, cambiarInputObjetivo] = useState("")
   const [maximoPersonas, cambiarMaxPersonas] = useState(0)
   const [ilimitado, cambiarIlimitado] = useState(true)
+  const [nombreUsuario, cambiarNombreUsuario] = useState("")
 
   const {user} = useAuth()
 
@@ -29,6 +30,19 @@ const Formulario = ({cambiarEstadoAlerta, cambiarAlerta}) => {
     cambiarEstadoAlerta(true)
     cambiarAlerta({ tipo: "exito", mensaje: "Bienvenido al formulario. Crea tu propia comunidad" })
   }, [cambiarEstadoAlerta, cambiarAlerta])
+
+  useEffect(() => {
+    if (user) {
+        let correo = user.email;
+        let nombre = user.displayName;
+
+        if (nombre === null) {
+            cambiarNombreUsuario(correo)
+        } else {
+            cambiarNombreUsuario(nombre)
+        }
+    }
+}, [user])
   
   const handleChange = (e) => {
     if(e.target.name === "titulo"){
@@ -57,7 +71,8 @@ const Formulario = ({cambiarEstadoAlerta, cambiarAlerta}) => {
         fechaMaxima: getUnixTime(fecha),
         fechaCreacion: getUnixTime(fechaHoy),
         maxPersonas: maxPersonas,
-        uidUsuario: user.uid
+        uidUsuario: user.uid,
+        nombreUsuario: nombreUsuario
       })
 
       cambiarEstadoAlerta(true)

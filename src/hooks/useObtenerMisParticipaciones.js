@@ -25,6 +25,7 @@ const useObtenerMisParticipaciones = () => {
             return unsuscribe
         }
     }, [user])
+    
     return [misParticipaciones];
 }
  
