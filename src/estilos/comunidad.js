@@ -242,6 +242,102 @@ const ParteComunidad = styled.div`
     height: 50px;
     margin-right: 10px;
 `;
+const Fundador = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #498C8A;
+    border-radius: 20px;
+    margin-top: 8px;
+    padding: 10px;
+    color: #fff;
+
+    .fundador { display: none; }
+    .centrar { margin: auto; }
+
+    @media (max-width: 800px) {
+        flex-direction: column;
+        padding-bottom: 5px;
+    }
+`;
+const Edit = styled.div`
+    display: flex;
+    cursor: pointer;
+
+    p {
+        margin: 0 5px;
+        font-weight: 300;
+    }
+
+    &:hover {
+        opacity: 0.8;
+
+        p {
+            text-decoration: underline;
+        }
+    }
+
+    @media (max-width: 800px) {      
+        display: none;
+    }
+`;
+const Delete = styled.div`
+    display: flex;
+    cursor: pointer;
+
+    div {
+        display: flex;
+
+        p {
+            margin: 0 5px;
+            font-weight: 300;
+        }
+    }
+
+    
+    .eliminar { display: none; }
+
+    &:hover {
+        opacity: 0.8;
+
+        p { text-decoration: underline; }
+    }
+
+    @media (max-width: 800px) {
+        margin-top: 15px;
+        display: flex;
+        justify-content: space-between;
+        width: 95%;
+
+        .eliminar { display: flex; }
+
+        &:hover {
+            opacity: 1;
+
+            p { text-decoration: none; }
+        }
+
+        div {
+            p { font-size: 14px; }
+
+            &:hover {
+                opacity: 0.8;
+
+                p { text-decoration: underline; }
+            }            
+        }
+    }
+`;
+const NombreFundador = styled.div`
+    @media (max-width: 800px) {
+        font-size: 15px;
+        padding: 5px;
+        border-bottom: 1px solid #000;
+        max-width: 280px;
+        text-align: justify;
+        word-break: break-all
+    }
+`;
 const InputComentarios = styled.form`
     margin-top: 20px;
     display: flex;
@@ -338,4 +434,4 @@ const Cargando = styled.img`
     margin: 10px auto;
 `;
 
-export {Contenedor, Regresar, ContenedorTitulo, Titulo, ContenedorInfo, Categoria, Fecha, Objetivo, Participacion, Participantes, Restricciones, Unirme, ParteComunidad, InputComentarios, Icono, ContenedorComentarios, HeaderComentarios, Coments, Comentario, Perfil, Nombre, TextoComentario, Cargando}
+export {Contenedor, Regresar, ContenedorTitulo, Titulo, ContenedorInfo, Categoria, Fecha, Objetivo, Participacion, Participantes, Restricciones, Unirme, ParteComunidad, Fundador, Edit, Delete, NombreFundador, InputComentarios, Icono, ContenedorComentarios, HeaderComentarios, Coments, Comentario, Perfil, Nombre, TextoComentario, Cargando}

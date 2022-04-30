@@ -6,7 +6,6 @@ import agregarComunidad from "../firebase/agregarComentario";
 import { useAuth } from "../contextos/authContext";
 import getUnixTime from 'date-fns/getUnixTime'
 import useObtenerComentarios from "../hooks/useObtenerComentarios";
-import SpinnerLoader from "../imagenes/SpinnerLoader.gif"
 
 const Comentarios = ({comunidad, cambiarEstadoAlerta, cambiarAlerta}) => {
     const [comentario, cambiarComentario] = useState("")
@@ -81,7 +80,7 @@ const Comentarios = ({comunidad, cambiarEstadoAlerta, cambiarAlerta}) => {
         <ContenedorComentarios>
             <HeaderComentarios><IconoComentario />Comentarios...</HeaderComentarios>
         
-            {comentarios.length > 0 ?
+            {comentarios &&
                 <Coments>
                     {comentarios.map((comentario) => (
                         <Comentario key={comentario.id} id={comentario.id}>
@@ -90,8 +89,6 @@ const Comentarios = ({comunidad, cambiarEstadoAlerta, cambiarAlerta}) => {
                         </Comentario>
                     ))}
                 </Coments>
-            :
-                <Coments><img src={SpinnerLoader} alt="Cargando..." /></Coments>
             }
             
         </ContenedorComentarios>
