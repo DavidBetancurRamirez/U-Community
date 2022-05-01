@@ -255,6 +255,11 @@ const Fundador = styled.div`
     .fundador { display: none; }
     .centrar { margin: auto; }
 
+    a, a:visited, a:hover, a:active { 
+        color: inherit;
+        text-decoration: none;
+    }
+
     @media (max-width: 800px) {
         flex-direction: column;
         padding-bottom: 5px;
@@ -268,6 +273,8 @@ const Edit = styled.div`
         margin: 0 5px;
         font-weight: 300;
     }
+
+    svg { margin-top: -2px; }
 
     &:hover {
         opacity: 0.8;
@@ -292,6 +299,8 @@ const Delete = styled.div`
             margin: 0 5px;
             font-weight: 300;
         }
+
+        svg { margin-top: -2px; }
     }
 
     
@@ -338,6 +347,73 @@ const NombreFundador = styled.div`
         word-break: break-all
     }
 `;
+const PopUp = styled.div`
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.7);
+    transition: opacity 500ms;
+    visibility: hidden;
+    opacity: 0;
+    z-index: 5;
+
+    &:target {
+        visibility: visible;
+        opacity: 1;
+    }
+`;
+const ContPopUp = styled.div`
+    margin: 80px auto;
+    padding: 20px;
+    padding-bottom: 10px;
+    background: #fff;
+    border-radius: 5px;
+    width: 450px;
+    position: relative;
+    transition: all 5s ease-in-out;
+
+    .texto { text-align: center; }
+
+    div {
+        display: flex;
+        justify-content: space-between;
+        margin: 0;
+        width: 100%;
+        padding: 10px;
+
+        h2 {
+            margin-top: 0;
+            color: #333;
+            font-weight: 800;
+        }
+    }
+
+    span {
+        margin-top: 10px;
+        display: flex;
+        justify-content: space-between;
+
+        a {
+            width: 48%;
+            font-weight: 500;
+            color: #fff;
+            padding: 5px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 10px;
+        }
+
+        .volver { background-color: ${theme.categoria.diversion}; }
+        .aceptar { background-color: ${theme.verde}; }
+    }
+
+    @media (max-width: 500px) { 
+        width: 90%;
+        padding: 15px 10px 10px 10px;
+    }
+`;
 const InputComentarios = styled.form`
     margin-top: 20px;
     display: flex;
@@ -346,7 +422,7 @@ const InputComentarios = styled.form`
     input {
         width: 800px;
         background-color: #fff;
-        opacity: .8;
+        opacity: 0.8;
         border-radius: 10px;
         border: 1px solid #fff;
         outline: none;
@@ -434,4 +510,4 @@ const Cargando = styled.img`
     margin: 10px auto;
 `;
 
-export {Contenedor, Regresar, ContenedorTitulo, Titulo, ContenedorInfo, Categoria, Fecha, Objetivo, Participacion, Participantes, Restricciones, Unirme, ParteComunidad, Fundador, Edit, Delete, NombreFundador, InputComentarios, Icono, ContenedorComentarios, HeaderComentarios, Coments, Comentario, Perfil, Nombre, TextoComentario, Cargando}
+export {Contenedor, Regresar, ContenedorTitulo, Titulo, ContenedorInfo, Categoria, Fecha, Objetivo, Participacion, Participantes, Restricciones, Unirme, ParteComunidad, Fundador, Edit, Delete, NombreFundador, PopUp, ContPopUp, InputComentarios, Icono, ContenedorComentarios, HeaderComentarios, Coments, Comentario, Perfil, Nombre, TextoComentario, Cargando}

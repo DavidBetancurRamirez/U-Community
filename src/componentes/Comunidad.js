@@ -4,7 +4,7 @@ import Header from "./Header";
 import { useNavigate, useParams } from 'react-router-dom';
 import {ReactComponent as IconoCalendario} from '../imagenes/IconoCalendario.svg'
 import {ReactComponent as IconoIzquierda} from '../imagenes/IconoIzquierda.svg'
-import {Contenedor, Regresar, ContenedorTitulo, Titulo, ContenedorInfo, Categoria, Fecha, Objetivo, Cargando, Fundador, Edit, Delete, NombreFundador} from '../estilos/comunidad'
+import {Contenedor, Regresar, ContenedorTitulo, Titulo, ContenedorInfo, Categoria, Fecha, Objetivo, Cargando, Fundador, Edit, Delete, NombreFundador, PopUp, ContPopUp} from '../estilos/comunidad'
 import useObtenerComunidad from "../hooks/useObtenerComunidad";
 import formatearFecha from "../funciones/formatearFecha";
 import Comentarios from "../elementos/Comentarios";
@@ -13,6 +13,7 @@ import Actividad from "../elementos/Actividad";
 import {ReactComponent as IconoEliminar} from '../imagenes/IconoEliminar.svg'
 import {ReactComponent as IconoEditar} from '../imagenes/IconoEditar.svg'
 import { useAuth } from "../contextos/authContext";
+import {ReactComponent as IconoCerrar} from '../imagenes/IconoCerrar.svg'
 
 const Comunidad = ({cambiarEstadoAlerta, cambiarAlerta}) => {
     const [fundador, cambiarFundador] = useState({
@@ -70,19 +71,37 @@ const Comunidad = ({cambiarEstadoAlerta, cambiarAlerta}) => {
                 <Actividad comunidad={comunidad} cambiarAlerta={cambiarAlerta} cambiarEstadoAlerta={cambiarEstadoAlerta} />
 
                 <Fundador>
-                    <Edit className={fundador.fundador}>
-                        <IconoEliminar /><p>Eliminar</p>
-                    </Edit>
+                    <a href="#popup1">
+                        <Edit className={fundador.fundador}>
+                            <IconoEliminar /><p>Eliminar</p>
+                        </Edit>
+                    </a>
                     <NombreFundador className={fundador.centrar}>Fundador: {comunidad.data().nombreUsuario}</NombreFundador>
                     <Delete className={fundador.fundador}>
-                        <div className="eliminar">
-                            <IconoEliminar /><p>Eliminar</p>
-                        </div>
+                        <a href="#popup1">
+                            <div className="eliminar">
+                                <IconoEliminar /><p>Eliminar</p>
+                            </div>
+                        </a>
                         <div>
                             <p>Editar</p><IconoEditar />
                         </div>
                     </Delete>
                 </Fundador>
+
+                <PopUp id="popup1">
+                    <ContPopUp>
+                        <div>
+                            <h2>¿Estas seguro de eliminarla?</h2>
+                            <a href="#/"><IconoCerrar /></a>    
+                        </div>                    
+                        <div className="texto">Luego de eliminar la comunidad no hay manera de recuperarla.</div>
+                        <span>
+                            <a className="volver" href="#/">Volver</a>
+                            <a className="aceptar" href="/">Aceptar</a>
+                        </span>
+                    </ContPopUp>
+                </PopUp>
 
                 <Comentarios comunidad={comunidad} cambiarAlerta={cambiarAlerta} cambiarEstadoAlerta={cambiarEstadoAlerta} />
 
