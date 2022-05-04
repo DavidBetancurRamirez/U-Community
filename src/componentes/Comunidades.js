@@ -7,28 +7,14 @@ import MisComunidades from "../elementos/MisComunidades";
 import TodasLasComunidades from "../elementos/TodasLasComunidades";
 
 const Comunidades = ({cambiarEstadoAlerta, cambiarAlerta}) => {
-    const [misParticipaciones, cambiarMisParticipaciones] = useState(false)
-    const [misComunidades, cambiarMisComunidades] = useState(false)
-    const [todas, cambiarTodas] = useState(true)
+    const [pagina, cambiarPagina] = useState("todas")
 
     const {user} = useAuth()
 
     const navigate = useNavigate()
 
-    const selector = (id) => {
-        if (id.target.id === "radio-1") {
-            cambiarMisParticipaciones(true)
-            cambiarMisComunidades(false)
-            cambiarTodas(false)
-        } else if (id.target.id === "radio-2") {
-            cambiarMisParticipaciones(false)
-            cambiarMisComunidades(true)
-            cambiarTodas(false)
-        } else if (id.target.id === "radio-3") {
-            cambiarMisParticipaciones(false)
-            cambiarMisComunidades(false)
-            cambiarTodas(true)
-        }
+    const handleChange = (e) => {
+        cambiarPagina(e.target.value)
     }
 
     const handleClick = () => {
@@ -45,20 +31,20 @@ const Comunidades = ({cambiarEstadoAlerta, cambiarAlerta}) => {
     <>
         <Contenedor>
             <ContenedorFiltros>
-                <div>
-                    <Input type="radio" id="radio-1" name="tabs" onClick={(id) => selector(id)} />
+                <div  onChange={(e) => handleChange(e)}>
+                    <Input type="radio" id="radio-1" name="tabs" value="participaciones"  />
                         <Label htmlFor="radio-1">Mis participaciones</Label>
-                    <Input type="radio" id="radio-2" name="tabs" onClick={(id) => selector(id)} />
+                    <Input type="radio" id="radio-2" name="tabs" value="propias" />
                         <Label htmlFor="radio-2">Mis comunidades</Label>
-                    <Input type="radio" id="radio-3" name="tabs" defaultChecked onClick={(id) => selector(id)} />
+                    <Input type="radio" id="radio-3" name="tabs" defaultChecked value="todas" />
                         <Label htmlFor="radio-3">Todas</Label>
                     <span className="glider"></span>
                 </div>
             </ContenedorFiltros>
             
-            {misParticipaciones && <MisParticipaciones />}               
-            {misComunidades && <MisComunidades cambiarAlerta={cambiarAlerta} cambiarEstadoAlerta={cambiarEstadoAlerta} />}
-            {todas && <TodasLasComunidades />}
+            {pagina === "participaciones" && <MisParticipaciones />}               
+            {pagina === "propias" && <MisComunidades cambiarAlerta={cambiarAlerta} cambiarEstadoAlerta={cambiarEstadoAlerta} />}
+            {pagina === "todas" && <TodasLasComunidades />}
             
         </Contenedor>
 

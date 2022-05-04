@@ -61,7 +61,7 @@ const Register = ({cambiarEstadoAlerta, cambiarAlerta}) => {
                 </ContGoogleR>            
 
                 <FormularioR>
-                    <h3>Iniciar Sesión</h3>
+                    <h3>Registrarse</h3>
                     <div>
                         <Input
                             type="email"

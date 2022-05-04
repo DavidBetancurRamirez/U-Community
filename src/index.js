@@ -13,6 +13,7 @@ import Login from './componentes/Login';
 import Register from './componentes/Register';
 import Alerta from './elementos/Alerta';
 import { ProtectedRoutes } from './elementos/ProtectRoutes';
+import Valoracion from './componentes/Valoracion';
 
 const Index = () => {
   const [estadoAlerta, cambiarEstadoAlerta] = useState(false)
@@ -34,6 +35,8 @@ const Index = () => {
 
             <Route path = "/login" element = {<Login cambiarAlerta={cambiarAlerta} cambiarEstadoAlerta={cambiarEstadoAlerta} />} />
             <Route path = "/register" element = {<Register cambiarAlerta={cambiarAlerta} cambiarEstadoAlerta={cambiarEstadoAlerta} />} />
+
+            <Route path = "/valoracion" element = {<Valoracion cambiarAlerta={cambiarAlerta} cambiarEstadoAlerta={cambiarEstadoAlerta} />} />
             
             <Route path="/formulario" element={
               <ProtectedRoutes>

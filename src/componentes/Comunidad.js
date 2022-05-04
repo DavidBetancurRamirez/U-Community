@@ -32,11 +32,14 @@ const Comunidad = ({cambiarEstadoAlerta, cambiarAlerta}) => {
             if (user) {
                 if (user.uid === comunidad.data().uidUsuario) {
                     cambiarFundador({
-                        fundador: "fundador",
-                        centrar: "centrar"
+                        fundador: "",
+                        centrar: ""
                     })
                 } else {
-                    cambiarFundador("")
+                    cambiarFundador({
+                        fundador: "noFundador",
+                        centrar: "centrar"
+                    })
                 }
             }
         }
@@ -98,7 +101,7 @@ const Comunidad = ({cambiarEstadoAlerta, cambiarAlerta}) => {
                         <div className="texto">Luego de eliminar la comunidad no hay manera de recuperarla.</div>
                         <span>
                             <a className="volver" href="#/">Volver</a>
-                            <a className="aceptar" href="/">Aceptar</a>
+                            <a className="aceptar" href="#/">Aceptar</a>
                         </span>
                     </ContPopUp>
                 </PopUp>

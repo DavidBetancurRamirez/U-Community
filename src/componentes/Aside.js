@@ -145,7 +145,7 @@ const Aside = ({cambiarEstadoAlerta, cambiarAlerta}) => {
                             {MisComunidades.length > 0 ? 
                                 <>
                                     {MisComunidades.map((miComunidad) => (                            
-                                        <ListaLi key={miComunidad.id} id={miComunidad.id}>{miComunidad.titulo}</ListaLi>
+                                        <ListaLi key={miComunidad.id} id={miComunidad.id} onClick={() => navigate(`/comunidad/${miComunidad.id}`)}>{miComunidad.titulo}</ListaLi>
                                     ))}
                                 </>
                             :
@@ -173,7 +173,7 @@ const Aside = ({cambiarEstadoAlerta, cambiarAlerta}) => {
                             {MisParticipaciones.length > 0 ? 
                                 <>
                                     {MisParticipaciones.map((miParticipacion) => (                            
-                                        <ListaLi key={miParticipacion.id} id={miParticipacion.id}>{miParticipacion.titulo}</ListaLi>
+                                        <ListaLi key={miParticipacion.id} id={miParticipacion.id} onClick={() => navigate(`/comunidad/${miParticipacion.id}`)}>{miParticipacion.titulo}</ListaLi>
                                     ))}
                                 </>
                             :

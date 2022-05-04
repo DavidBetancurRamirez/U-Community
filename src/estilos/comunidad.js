@@ -252,7 +252,7 @@ const Fundador = styled.div`
     padding: 10px;
     color: #fff;
 
-    .fundador { display: none; }
+    .noFundador { display: none; }
     .centrar { margin: auto; }
 
     a, a:visited, a:hover, a:active { 
