@@ -28,11 +28,6 @@ const Formulario = ({cambiarEstadoAlerta, cambiarAlerta, comunidad}) => {
 
   let caracteresTitulo = inputTitulo.length
 
-  useEffect(() => {     
-    cambiarEstadoAlerta(true)
-    cambiarAlerta({ tipo: "exito", mensaje: "Bienvenido al formulario. Crea tu propia comunidad" })
-  }, [cambiarEstadoAlerta, cambiarAlerta])
-
   useEffect(() => {
     if (user) {      
       if (comunidad) {
