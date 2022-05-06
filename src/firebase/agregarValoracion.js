@@ -6,7 +6,7 @@ const agregarValoracion = ({experiencia, categoria, estrellas}) => {
     return addDoc(collection(db, "valoraciones"), {
         experiencia: experiencia,
         categoria: categoria, 
-        estrellas: estrellas
+        estrellas: Number(estrellas)
     });
 }
  

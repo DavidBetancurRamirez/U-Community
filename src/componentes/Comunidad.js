@@ -14,6 +14,7 @@ import {ReactComponent as IconoEliminar} from '../imagenes/IconoEliminar.svg'
 import {ReactComponent as IconoEditar} from '../imagenes/IconoEditar.svg'
 import { useAuth } from "../contextos/authContext";
 import {ReactComponent as IconoCerrar} from '../imagenes/IconoCerrar.svg'
+import eliminarComunidad from "../firebase/eliminarComunidad";
 
 const Comunidad = ({cambiarEstadoAlerta, cambiarAlerta}) => {
     const [fundador, cambiarFundador] = useState({
@@ -22,25 +23,22 @@ const Comunidad = ({cambiarEstadoAlerta, cambiarAlerta}) => {
     });
 
     const navigate = useNavigate();
-
-    const {id} = useParams();
     const {user} = useAuth()
+    const {id} = useParams();
     const [comunidad] = useObtenerComunidad(id)
 
     useEffect(() => {
         if (comunidad) {
-            if (user) {
-                if (user.uid === comunidad.data().uidUsuario) {
-                    cambiarFundador({
-                        fundador: "",
-                        centrar: ""
-                    })
-                } else {
-                    cambiarFundador({
-                        fundador: "noFundador",
-                        centrar: "centrar"
-                    })
-                }
+            if (user && user.uid === comunidad.data().uidUsuario) {
+                cambiarFundador({
+                    fundador: "",
+                    centrar: ""
+                })
+            } else {
+                cambiarFundador({
+                    fundador: "noFundador",
+                    centrar: "centrar"
+                })
             }
         }
     }, [user, comunidad])
@@ -86,7 +84,7 @@ const Comunidad = ({cambiarEstadoAlerta, cambiarAlerta}) => {
                                 <IconoEliminar /><p>Eliminar</p>
                             </div>
                         </a>
-                        <div>
+                        <div onClick={() => navigate(`/editar/${comunidad.id}`)}>
                             <p>Editar</p><IconoEditar />
                         </div>
                     </Delete>
@@ -101,7 +99,7 @@ const Comunidad = ({cambiarEstadoAlerta, cambiarAlerta}) => {
                         <div className="texto">Luego de eliminar la comunidad no hay manera de recuperarla.</div>
                         <span>
                             <a className="volver" href="#/">Volver</a>
-                            <a className="aceptar" href="#/">Aceptar</a>
+                            <a className="aceptar" href="#/" onClick={() => eliminarComunidad(comunidad.id, {cambiarEstadoAlerta, cambiarAlerta, navigate})}>Aceptar</a>
                         </span>
                     </ContPopUp>
                 </PopUp>

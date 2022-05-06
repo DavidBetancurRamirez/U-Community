@@ -117,6 +117,34 @@ const Plus = styled.div`
         width: 100%;
     }
 `;
+const Valorar = styled.div`
+    width: 100%;
+    height: auto;
+    background-color: #fff;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 0 20px 20px 0;
+    transition: 1s ease all;
+    cursor: pointer;
+
+    p {
+        font-weight: 300;
+    }
+
+    &:hover, &:active {
+        background-color: ${theme.grisOscuro};
+        p { 
+            text-decoration: underline; 
+            color: ${theme.azulU};
+        }
+    }
+`;
+const Flecha = {
+    width: "20px",
+    height: "20px",
+    transform: "rotate(270deg)"
+};
 
 const Aside = ({cambiarEstadoAlerta, cambiarAlerta}) => {
     const navigate = useNavigate();
@@ -185,6 +213,11 @@ const Aside = ({cambiarEstadoAlerta, cambiarAlerta}) => {
                     }
                 </Lista>
             </Menu>
+
+            <Valorar  onClick={() => navigate("/valoracion")}>
+                <p>Valorar</p>
+                <lord-icon src="https://cdn.lordicon.com/xhdhjyqy.json" colors="primary:#09a4dd" trigger="loop-on-hover" style={Flecha}></lord-icon>
+            </Valorar>
         </AsideBar>
     );
 }

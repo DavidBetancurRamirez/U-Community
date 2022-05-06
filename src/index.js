@@ -14,6 +14,7 @@ import Register from './componentes/Register';
 import Alerta from './elementos/Alerta';
 import { ProtectedRoutes } from './elementos/ProtectRoutes';
 import Valoracion from './componentes/Valoracion';
+import EditarGasto from './componentes/EditarGasto';
 
 const Index = () => {
   const [estadoAlerta, cambiarEstadoAlerta] = useState(false)
@@ -31,7 +32,8 @@ const Index = () => {
           <Routes>
             <Route path="*" element={<Error404 />} />
             <Route path="/" element={<App cambiarAlerta={cambiarAlerta} cambiarEstadoAlerta={cambiarEstadoAlerta} /> } />
-            <Route path="/comunidad/:id" element={<Comunidad cambiarAlerta={cambiarAlerta} cambiarEstadoAlerta={cambiarEstadoAlerta} /> } />            
+            <Route path="/comunidad/:id" element={<Comunidad cambiarAlerta={cambiarAlerta} cambiarEstadoAlerta={cambiarEstadoAlerta} /> } />  
+            <Route path="/editar/:id" element={<EditarGasto cambiarAlerta={cambiarAlerta} cambiarEstadoAlerta={cambiarEstadoAlerta} /> } />            
 
             <Route path = "/login" element = {<Login cambiarAlerta={cambiarAlerta} cambiarEstadoAlerta={cambiarEstadoAlerta} />} />
             <Route path = "/register" element = {<Register cambiarAlerta={cambiarAlerta} cambiarEstadoAlerta={cambiarEstadoAlerta} />} />

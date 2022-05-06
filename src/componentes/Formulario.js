@@ -10,8 +10,10 @@ import agregarComunidad from "../firebase/agregarComunidad";
 import { useNavigate } from 'react-router-dom';
 import Header from "./Header";
 import { useAuth } from "../contextos/authContext";
+import editarComunidad from "../firebase/editarComunidad"
+import fromUnixTime from "date-fns/fromUnixTime";
 
-const Formulario = ({cambiarEstadoAlerta, cambiarAlerta}) => {
+const Formulario = ({cambiarEstadoAlerta, cambiarAlerta, comunidad}) => {
   const [inputTitulo, cambiarInputTitulo] = useState("")
   const [categoria, cambiarCategoria] = useState("Estudio")
   const [fecha, cambiarFecha] = useState(new Date());
@@ -26,23 +28,36 @@ const Formulario = ({cambiarEstadoAlerta, cambiarAlerta}) => {
 
   let caracteresTitulo = inputTitulo.length
 
-  useEffect(() => { // Carga primer vez      
+  useEffect(() => {     
     cambiarEstadoAlerta(true)
     cambiarAlerta({ tipo: "exito", mensaje: "Bienvenido al formulario. Crea tu propia comunidad" })
   }, [cambiarEstadoAlerta, cambiarAlerta])
 
   useEffect(() => {
-    if (user) {
-        let correo = user.email;
-        let nombre = user.displayName;
-
-        if (nombre === null) {
-            cambiarNombreUsuario(correo)
+    if (user) {      
+      if (comunidad) {
+        if (comunidad.data().uidUsuario === user.uid) {
+          cambiarInputTitulo(comunidad.data().titulo)
+          cambiarCategoria(comunidad.data().categoria)
+          cambiarFecha(fromUnixTime(comunidad.data().fechaMaxima))
+          cambiarInputObjetivo(comunidad.data().objetivo)
+          cambiarMaxPersonas(comunidad.data().maxPersonas)
+          cambiarIlimitado(false)
         } else {
-            cambiarNombreUsuario(nombre)
+          navigate("/")
         }
+      }
+
+      let correo = user.email;
+      let nombre = user.displayName;
+
+      if (nombre === null) {
+          cambiarNombreUsuario(correo)
+      } else {
+          cambiarNombreUsuario(nombre)
+      }
     }
-}, [user])
+}, [user, comunidad, navigate])
   
   const handleChange = (e) => {
     if(e.target.name === "titulo"){
@@ -60,38 +75,72 @@ const Formulario = ({cambiarEstadoAlerta, cambiarAlerta}) => {
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    let maxPersonas = parseFloat(maximoPersonas).toFixed(2);
     let fechaHoy = new Date();
 
-    try {
-      await agregarComunidad({
-        titulo: inputTitulo,
-        categoria: categoria,
-        objetivo: inputObjetivo,
-        fechaMaxima: getUnixTime(fecha),
-        fechaCreacion: getUnixTime(fechaHoy),
-        maxPersonas: maxPersonas,
-        uidUsuario: user.uid,
-        nombreUsuario: nombreUsuario
-      })
-
-      cambiarEstadoAlerta(true)
-      cambiarAlerta({ tipo: "exito", mensaje: "Su comunidad a sido creado con exito" })
-
-      cambiarInputTitulo("")
-      cambiarCategoria("Estudio")
-      cambiarFecha(new Date())
-      cambiarInputObjetivo("")
-      cambiarMaxPersonas(0)
-      cambiarIlimitado(true)
-
-    } catch (error) {
-      console.log(error)
-
-      cambiarEstadoAlerta(true)
-      cambiarAlerta({ tipo: "error", mensaje: "No a sido posible crear su comunidad, porfavor intentelo mas tarde" })
-    }
+    if (inputTitulo.length > 0 && inputObjetivo.length > 0) {
+      if (comunidad) {
+        try {
+          await editarComunidad({
+            id: comunidad.id,
+            titulo: inputTitulo,
+            categoria: categoria,
+            objetivo: inputObjetivo,
+            fechaMaxima: getUnixTime(fecha),
+            maxPersonas: maximoPersonas
+          })
     
+          cambiarEstadoAlerta(true)
+          cambiarAlerta({ tipo: "exito", mensaje: "Su comunidad a sido creado con exito" })
+    
+          navigate(`/comunidad/${comunidad.id}`)
+    
+        } catch (error) {  
+          console.log(error)
+          cambiarEstadoAlerta(true)
+          cambiarAlerta({ tipo: "error", mensaje: "No a sido posible crear su comunidad, porfavor intentelo mas tarde" })
+        }
+      } else {
+        try {
+          await agregarComunidad({
+            titulo: inputTitulo,
+            categoria: categoria,
+            objetivo: inputObjetivo,
+            fechaMaxima: getUnixTime(fecha),
+            fechaCreacion: getUnixTime(fechaHoy),
+            maxPersonas: maximoPersonas,
+            uidUsuario: user.uid,
+            nombreUsuario: nombreUsuario
+          })
+    
+          cambiarEstadoAlerta(true)
+          cambiarAlerta({ tipo: "exito", mensaje: "Su comunidad a sido creado con exito" })
+    
+          cambiarInputTitulo("")
+          cambiarCategoria("Estudio")
+          cambiarFecha(new Date())
+          cambiarInputObjetivo("")
+          cambiarMaxPersonas(0)
+          cambiarIlimitado(true)
+    
+        } catch (error) {  
+          cambiarEstadoAlerta(true)
+          cambiarAlerta({ tipo: "error", mensaje: "No a sido posible crear su comunidad, porfavor intentelo mas tarde" })
+        }
+      }
+
+    } else {
+      cambiarEstadoAlerta(true)
+      cambiarAlerta({ tipo: "error", mensaje: "Titulo y/o objetivo sin información" })
+    }
+
+  }
+
+  const regresar = () => {
+    if (comunidad) {
+      navigate(`/comunidad/${comunidad.id}`)
+    } else {
+      navigate("/")
+    }
   }
 
   return (
@@ -181,8 +230,8 @@ const Formulario = ({cambiarEstadoAlerta, cambiarAlerta}) => {
 
           <Botones>
             <div className="vacio"></div>
-            <Boton type="submit">Crear Comunidad</Boton>
-            <Regresar onClick={() => navigate("/")}>
+            <Boton type="submit">{comunidad ? "Editar Comunidad" : "Crear Comunidad"}</Boton>
+            <Regresar onClick={() => regresar()}>
               <IconoIzquierda />
               Regresar
             </Regresar>

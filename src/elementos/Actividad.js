@@ -16,7 +16,7 @@ const Actividad = ({comunidad, cambiarEstadoAlerta, cambiarAlerta}) => {
 
     const agregar = async () => {
         if (user) {
-            if (comunidad.data().participantes.length >= comunidad.data().maxPersonas && comunidad.data().maxPersonas !== "0.00") {
+            if (comunidad.data().participantes.length >= comunidad.data().maxPersonas && comunidad.data().maxPersonas !== 0) {
                 cambiarEstadoAlerta(true)
                 cambiarAlerta({ tipo: "error", mensaje: "La comunidad a la que deseas unirte ya alcanzo su limite" })
             } else {
@@ -55,8 +55,8 @@ const Actividad = ({comunidad, cambiarEstadoAlerta, cambiarAlerta}) => {
         <Participacion>
             <Participantes><IconoPersonas />Participantes: {comunidad.data().participantes.length}</Participantes>
 
-            {comunidad.data().maxPersonas !== "0.00" && 
-                <Restricciones>Maximo participantes: {parseFloat(comunidad.data().maxPersonas).toFixed(0)}<IconoCaution /></Restricciones>
+            {comunidad.data().maxPersonas !== 0 && 
+                <Restricciones>Maximo participantes: {comunidad.data().maxPersonas}<IconoCaution /></Restricciones>
             }
 
             {suscrito ?
