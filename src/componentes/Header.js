@@ -16,9 +16,8 @@ const General = styled.div`
     margin-bottom: 15px;
 
     @media (max-width: 900px) {
-        height: 70px;
+        height: 80px;
         margin-bottom: 10px;
-        // flex-direction: row-reverse; Solo para menu desplegable
     }
 `;
 const ContTitulo = styled.div`
@@ -38,8 +37,8 @@ const Imagen = styled.div`
     }
 
     @media (max-width: 900px) {
-        height: 70px;
-        width: 70px;
+        height: 80px;
+        width: 80px;
     }
 `;
 const Titulo = styled.div`
@@ -52,7 +51,7 @@ const Titulo = styled.div`
     text-shadow: 2px 5px 15px;
 
     @media (max-width: 480px) {
-        font-size: 18px;
+        font-size: 16px;
     }
 `;
 const Sesion = styled.div`
@@ -61,6 +60,11 @@ const Sesion = styled.div`
     justify-content: center;
     align-items: flex-end;
     flex-direction: column;
+
+    @media (max-width: 900px) {
+        justify-content: space-around;
+        align-items: center;
+    }
 `;
 const Usuario = styled.div`
     display: flex;
@@ -71,14 +75,14 @@ const Usuario = styled.div`
         font-size: 14px;
         text-decoration: underline;
         color: #f2f2f2;
-        margin-bottom: 10px;
+        margin-top: 5px;
         margin-right: 5px;
     }
 
     svg {
         margin: 0px 10px;
 
-        @media (max-width: 715px) {
+        @media (max-width: 900px) {
             display: none;
         }
     } 
@@ -105,7 +109,8 @@ const Bienvenido = styled.p`
 const CerrarSesion = styled.p`
     font-weight:200;
     font-size: 14px;
-    color: #C7BFBF;
+    color: #fff;
+    opacity: 0.9;
     display: flex;
     margin-right: 10px;
 
@@ -117,6 +122,7 @@ const CerrarSesion = styled.p`
 
     @media (max-width: 715px) {
         font-size: 12px;
+        margin-bottom: 10px;
     }
 `;
 
@@ -154,7 +160,7 @@ const Header = ({cambiarEstadoAlerta, cambiarAlerta}) => {
                             <IconoPerfil />
                             <p className="valorar" onClick={() => navigate("/valoracion")}>Valorar</p>
                         </Usuario>
-                        <CerrarSesion onClick={handlelogout}>Cerrar Sesion</CerrarSesion>
+                        <CerrarSesion onClick={handlelogout}>Cerrar Sesión</CerrarSesion>
                     </>
                     :
                     <>

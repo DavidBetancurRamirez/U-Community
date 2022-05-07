@@ -202,10 +202,10 @@ const Crear = styled.div`
     @media (max-width: 900px) {
         display: block;
         position: fixed;
-        bottom: 5px;
-        right: 5px;
-        width: 30px;
-        height: 30px;
+        bottom: 8px;
+        right: 8px;
+        width: 40px;
+        height: 40px;
         padding: 1px;
         border-radius: 50%;
         background-color: #fff;

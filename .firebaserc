@@ -1,5 +1,7 @@
 {
   "projects": {
-    "default": "u-community-8068e"
-  }
+    "default": "u-community-55571",
+    "u-community": "u-community-55571"
+  },
+  "targets": {}
 }

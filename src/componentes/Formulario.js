@@ -22,6 +22,8 @@ const Formulario = ({cambiarEstadoAlerta, cambiarAlerta, comunidad}) => {
   const [ilimitado, cambiarIlimitado] = useState(true)
   const [nombreUsuario, cambiarNombreUsuario] = useState("")
 
+  console.log(inputObjetivo.length)
+
   const {user} = useAuth()
 
   const navigate = useNavigate();
@@ -72,7 +74,7 @@ const Formulario = ({cambiarEstadoAlerta, cambiarAlerta, comunidad}) => {
 
     let fechaHoy = new Date();
 
-    if (inputTitulo.length > 0 && inputObjetivo.length > 0) {
+    if (inputTitulo.length > 4 && inputObjetivo.length > 0 && inputObjetivo.length <= 1000) {
       if (comunidad) {
         try {
           await editarComunidad({
@@ -121,11 +123,12 @@ const Formulario = ({cambiarEstadoAlerta, cambiarAlerta, comunidad}) => {
           cambiarEstadoAlerta(true)
           cambiarAlerta({ tipo: "error", mensaje: "No a sido posible crear su comunidad, porfavor intentelo mas tarde" })
         }
+
       }
 
     } else {
       cambiarEstadoAlerta(true)
-      cambiarAlerta({ tipo: "error", mensaje: "Titulo y/o objetivo sin información" })
+      cambiarAlerta({ tipo: "error", mensaje: "Titulo y/o objetivo sin información, ó el objetivo sobrepasa 1000 caracteres" })
     }
 
   }
@@ -147,6 +150,11 @@ const Formulario = ({cambiarEstadoAlerta, cambiarAlerta, comunidad}) => {
       <Header cambiarAlerta={cambiarAlerta} cambiarEstadoAlerta={cambiarEstadoAlerta} />
 
       <Contenedor>
+        <Regresar onClick={() => regresar()} className="arriba">
+          <IconoIzquierda />
+          Regresar
+        </Regresar>
+
         <CreaComunidad>Crea tu propia comunidad</CreaComunidad>
 
         <Form onSubmit={handleSubmit} categoria="categoria">
@@ -162,6 +170,7 @@ const Formulario = ({cambiarEstadoAlerta, cambiarAlerta, comunidad}) => {
                 value={inputTitulo}
                 onChange={handleChange}
                 maxLength="35"
+                minLength="4"
               />
               {caracteresTitulo === 35 ? <div><p>{caracteresTitulo}/35</p></div>
               : <div>{caracteresTitulo}/35</div> }
@@ -182,6 +191,7 @@ const Formulario = ({cambiarEstadoAlerta, cambiarAlerta, comunidad}) => {
               placeholder="Escriba aqui el objetivo de su comunidad"
               value={inputObjetivo}
               onChange={handleChange}
+              maxLength="1000"
             />
           </Objetivo>
 
@@ -226,7 +236,7 @@ const Formulario = ({cambiarEstadoAlerta, cambiarAlerta, comunidad}) => {
           <Botones>
             <div className="vacio"></div>
             <Boton type="submit">{comunidad ? "Editar Comunidad" : "Crear Comunidad"}</Boton>
-            <Regresar onClick={() => regresar()}>
+            <Regresar onClick={() => regresar()} className="abajo">
               <IconoIzquierda />
               Regresar
             </Regresar>

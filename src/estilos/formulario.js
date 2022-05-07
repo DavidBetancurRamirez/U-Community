@@ -17,6 +17,12 @@ const Contenedor = styled.div`
   @media (max-width: 1050px) {
     width: 100%;
     padding: 0 20px;
+    margin-top: 15px;
+  }  
+  @media (min-width: 900px) {
+    .arriba {
+      display: none;
+    }
   }
 `;
 
@@ -198,6 +204,10 @@ const Botones = styled.div`
   @media (max-width: 900px) {
     flex-direction: column;
     align-items: center;
+
+    .abajo {
+      display: none;
+    }
   }
 `;
 
@@ -245,7 +255,8 @@ const Regresar = styled.div`
   }
 
   @media (max-width: 900px) {
-    margin-top: 20px;
+    margin-bottom: 15px;
+    width: 110px;
   }
 `;
 
