@@ -25,35 +25,35 @@ const meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', '
 const dias_semana_cortos = ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'];
 
 const ContenedorInput = styled.div`
-    input {
-        font-family: 'Work Sans', sans-serif;       
-        box-sizing: border-box;
-        background: #fff;
-        border: none;
-        cursor: pointer;
-        border-radius: 0 10px 0 10px; 
-        height: 25px; 
-        width: 235px;
-        padding: 5px 20px; 
-        font-size: 16px; 
-        text-align: center;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+  input {
+      font-family: 'Work Sans', sans-serif;       
+      box-sizing: border-box;
+      background: #fff;
+      border: none;
+      cursor: pointer;
+      border-radius: 0 10px 0 10px; 
+      height: 25px; 
+      width: 235px;
+      padding: 5px 20px; 
+      font-size: 16px; 
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
-        @media (max-width: 900px) {
-          margin-left: 10px;
-        }
+      @media (max-width: 900px) {
+        margin-left: 10px;
+      }
 
-        @media (max-width: 500px) {
-          width: 200px;
-        }
-    }
+      @media (max-width: 500px) {
+        width: 200px;
+      }
+  }
 
-    div {
-      width: 100%;
-      font-size: 14px;
-    }
+  div {
+    width: 100%;
+    font-size: 14px;
+  }
 `;
 
 const Dates = ({fecha, cambiarFecha}) => {

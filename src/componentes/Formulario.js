@@ -12,6 +12,7 @@ import Header from "./Header";
 import { useAuth } from "../contextos/authContext";
 import editarComunidad from "../firebase/editarComunidad"
 import fromUnixTime from "date-fns/fromUnixTime";
+import startOfDay from "date-fns/startOfDay";
 
 const Formulario = ({cambiarEstadoAlerta, cambiarAlerta, comunidad}) => {
   const [inputTitulo, cambiarInputTitulo] = useState("")
@@ -21,8 +22,6 @@ const Formulario = ({cambiarEstadoAlerta, cambiarAlerta, comunidad}) => {
   const [maximoPersonas, cambiarMaxPersonas] = useState(0)
   const [ilimitado, cambiarIlimitado] = useState(true)
   const [nombreUsuario, cambiarNombreUsuario] = useState("")
-
-  console.log(inputObjetivo.length)
 
   const {user} = useAuth()
 
@@ -72,58 +71,66 @@ const Formulario = ({cambiarEstadoAlerta, cambiarAlerta, comunidad}) => {
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    let fechaHoy = new Date();
+    let fechaAhora = new Date();
+    let fechaHoy = getUnixTime(startOfDay(new Date()));
+
 
     if (inputTitulo.length > 4 && inputObjetivo.length > 0 && inputObjetivo.length <= 1000) {
-      if (comunidad) {
-        try {
-          await editarComunidad({
-            id: comunidad.id,
-            titulo: inputTitulo,
-            categoria: categoria,
-            objetivo: inputObjetivo,
-            fechaMaxima: getUnixTime(fecha),
-            maxPersonas: maximoPersonas
-          })
-    
-          cambiarEstadoAlerta(true)
-          cambiarAlerta({ tipo: "exito", mensaje: "Su comunidad a sido creado con exito" })
-    
-          navigate(`/comunidad/${comunidad.id}`)
-    
-        } catch (error) {  
-          console.log(error)
-          cambiarEstadoAlerta(true)
-          cambiarAlerta({ tipo: "error", mensaje: "No a sido posible crear su comunidad, porfavor intentelo mas tarde" })
-        }
-      } else {
-        try {
-          await agregarComunidad({
-            titulo: inputTitulo,
-            categoria: categoria,
-            objetivo: inputObjetivo,
-            fechaMaxima: getUnixTime(fecha),
-            fechaCreacion: getUnixTime(fechaHoy),
-            maxPersonas: maximoPersonas,
-            uidUsuario: user.uid,
-            nombreUsuario: nombreUsuario
-          })
-    
-          cambiarEstadoAlerta(true)
-          cambiarAlerta({ tipo: "exito", mensaje: "Su comunidad a sido creado con exito" })
-    
-          cambiarInputTitulo("")
-          cambiarCategoria("Estudio")
-          cambiarFecha(new Date())
-          cambiarInputObjetivo("")
-          cambiarMaxPersonas(0)
-          cambiarIlimitado(true)
-    
-        } catch (error) {  
-          cambiarEstadoAlerta(true)
-          cambiarAlerta({ tipo: "error", mensaje: "No a sido posible crear su comunidad, porfavor intentelo mas tarde" })
+      if (fechaHoy < getUnixTime(fecha)) {
+        if (comunidad) {
+          try {
+            await editarComunidad({
+              id: comunidad.id,
+              titulo: inputTitulo,
+              categoria: categoria,
+              objetivo: inputObjetivo,
+              fechaMaxima: getUnixTime(fecha),
+              maxPersonas: maximoPersonas
+            })
+      
+            cambiarEstadoAlerta(true)
+            cambiarAlerta({ tipo: "exito", mensaje: "Su comunidad a sido creado con exito" })
+      
+            navigate(`/comunidad/${comunidad.id}`)
+      
+          } catch (error) {  
+            console.log(error)
+            cambiarEstadoAlerta(true)
+            cambiarAlerta({ tipo: "error", mensaje: "No a sido posible crear su comunidad, porfavor intentelo mas tarde" })
+          }
+
+        } else {
+          try {
+            await agregarComunidad({
+              titulo: inputTitulo,
+              categoria: categoria,
+              objetivo: inputObjetivo,
+              fechaMaxima: getUnixTime(fecha),
+              fechaCreacion: getUnixTime(fechaAhora),
+              maxPersonas: maximoPersonas,
+              uidUsuario: user.uid,
+              nombreUsuario: nombreUsuario
+            })
+      
+            cambiarEstadoAlerta(true)
+            cambiarAlerta({ tipo: "exito", mensaje: "Su comunidad a sido creado con exito" })
+      
+            cambiarInputTitulo("")
+            cambiarCategoria("Estudio")
+            cambiarFecha(new Date())
+            cambiarInputObjetivo("")
+            cambiarMaxPersonas(0)
+            cambiarIlimitado(true)
+      
+          } catch (error) {  
+            cambiarEstadoAlerta(true)
+            cambiarAlerta({ tipo: "error", mensaje: "No a sido posible crear su comunidad, porfavor intentelo mas tarde" })
+          }
         }
 
+      } else {
+        cambiarEstadoAlerta(true)
+        cambiarAlerta({ tipo: "error", mensaje: "La fecha limite de la comunidad no puede ser anterior al dia de hoy" })
       }
 
     } else {
