@@ -1,10 +1,11 @@
 import {useEffect, useState} from "react";
 import { db } from "../firebase/firebaseConfig";
 import { useAuth } from "../contextos/authContext";
-import { collection, onSnapshot, query, orderBy, where } from "firebase/firestore";
+import { collection, onSnapshot, query, orderBy } from "firebase/firestore";
 
 const useObtenerMisParticipaciones = () => {
-    const [misParticipaciones, cambiarMisParticipaciones] = useState([])
+    const [comunidades, cambiarComunidades] = useState([])
+    const [MisParticipaciones, cambiarMisParticipaciones] = useState([])
 
     const {user} = useAuth();
 
@@ -12,12 +13,11 @@ const useObtenerMisParticipaciones = () => {
         if(user) {
             const consulta = query(
                 collection(db, "comunidades"),
-                where("participantes", "array-contains", user.uid),
                 orderBy('fechaCreacion', 'desc')
             )
 
             const unsuscribe = onSnapshot(consulta, (snapshot) => {
-                cambiarMisParticipaciones(snapshot.docs.map((comunidad) => {
+                cambiarComunidades(snapshot.docs.map((comunidad) => {
                     return {...comunidad.data(), id: comunidad.id}
                 }))
             }, (error) => {console.log(error)})
@@ -25,8 +25,26 @@ const useObtenerMisParticipaciones = () => {
             return unsuscribe
         }
     }, [user])
+
+    useEffect(() => {
+        let arreglo = [];
+
+        if (user) {
+            if (comunidades) {
+                for (let i=0;i<comunidades.length;i++) {
+                    for (let j=0;j<comunidades[i].participantes.length;j++) {
+                        if (comunidades[i].participantes[j].uidUsuario === user.uid) {
+                            arreglo.push(comunidades[i])
+                        }
+                    }
+                }
+            }
+        }
+
+        cambiarMisParticipaciones(arreglo)
+    }, [comunidades, user])
     
-    return [misParticipaciones];
+    return [MisParticipaciones];
 }
  
 export default useObtenerMisParticipaciones;

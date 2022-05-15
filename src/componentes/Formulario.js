@@ -130,7 +130,7 @@ const Formulario = ({cambiarEstadoAlerta, cambiarAlerta, comunidad}) => {
 
       } else {
         cambiarEstadoAlerta(true)
-        cambiarAlerta({ tipo: "error", mensaje: "La fecha limite de la comunidad no puede ser anterior al dia de hoy" })
+        cambiarAlerta({ tipo: "error", mensaje: "La fecha limite de la comunidad no puede ser anterior a la fecha actual" })
       }
 
     } else {

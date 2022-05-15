@@ -94,6 +94,8 @@ const Titulo = styled.div`
 const ContenedorInfo = styled.div`
     width: 30%;
     margin-left: 50px;
+    
+    .expirado { color: red; }
 
     @media (max-width: 900px) {
         width: 100%;
@@ -176,16 +178,13 @@ const Participacion = styled.div`
         height: auto;
     }
 `;
-const Participantes = styled.div`
-    svg {
-        height: 40px;
-        width: 40px;
-        margin: 10px;
-    }
+const ContenedorParticipantes = styled.div`
+    cursor: pointer;
+    position: relative;
+    transition: 1.5s ease all;
 
     @media (max-width: 800px) {
         width: 80%;
-        border-bottom: 1px dashed  #000;
         display: flex;
         justify-content: center;
 
@@ -198,6 +197,63 @@ const Participantes = styled.div`
     @media (max-width: 430px) {
         width: 95%;
     }
+`;
+const Participantes = styled.div`
+    width: 100%;
+
+    svg {
+        height: 40px;
+        width: 40px;
+        margin: 10px;
+    }
+
+    @media (max-width: 800px) {
+        border-bottom: 1px dashed  #000;
+        display: flex;
+        justify-content: center;
+
+        svg {
+            height: 30px;
+            width: 30px;
+        }
+    }
+`;
+const MostrarListaParticipantes = styled.div`
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: -140px;
+    left: 0;
+    width: 150%;
+    border-radius: 10px;
+    height: 140px;
+    overflow: auto;
+
+    div::before {
+        content: "- ";
+        white-space: pre;
+    }
+
+    div:first-child {
+        &::before{
+            content: "";
+        }
+
+        justify-content: center;
+        font-weight: 500;
+    }
+
+
+    @media (max-width: 800px) {
+        width: 100%;
+    }
+`; 
+const Participante = styled.div`
+    padding: 5px;
+    font-size: 14px;
+    font-weight: 300;
+    width: 100%;
 `;
 const Restricciones = styled.div`
     svg {
@@ -242,6 +298,28 @@ const ParteComunidad = styled.div`
     height: 50px;
     margin-right: 10px;
 `;
+const Abandonar = styled.a`
+    margin: 10px auto;
+    text-decoration: none;
+
+    button {
+        background-color: ${theme.categoria.diversion};
+        border: none;
+        border-radius: 15px;
+        padding: 5px;
+        color: #fff;
+        font-weight: 300;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+
+        svg {
+            margin-left: 10px;
+        }
+    }
+
+`;
 const Fundador = styled.div`
     display: flex;
     align-items: center;
@@ -251,9 +329,6 @@ const Fundador = styled.div`
     margin-top: 8px;
     padding: 10px;
     color: #fff;
-
-    .noFundador { display: none; }
-    .centrar { margin: auto; }
 
     a, a:visited, a:hover, a:active { 
         color: inherit;
@@ -338,6 +413,8 @@ const Delete = styled.div`
     }
 `;
 const NombreFundador = styled.div`
+    margin: auto;
+
     @media (max-width: 800px) {
         font-size: 15px;
         padding: 5px;
@@ -510,4 +587,4 @@ const Cargando = styled.img`
     margin: 10px auto;
 `;
 
-export {Contenedor, Regresar, ContenedorTitulo, Titulo, ContenedorInfo, Categoria, Fecha, Objetivo, Participacion, Participantes, Restricciones, Unirme, ParteComunidad, Fundador, Edit, Delete, NombreFundador, PopUp, ContPopUp, InputComentarios, Icono, ContenedorComentarios, HeaderComentarios, Coments, Comentario, Perfil, Nombre, TextoComentario, Cargando}
+export {Contenedor, Regresar, ContenedorTitulo, Titulo, ContenedorInfo, Categoria, Fecha, Objetivo, Participacion, ContenedorParticipantes, MostrarListaParticipantes, Participantes, Participante, Restricciones, Unirme, ParteComunidad, Abandonar, Fundador, Edit, Delete, NombreFundador, PopUp, ContPopUp, InputComentarios, Icono, ContenedorComentarios, HeaderComentarios, Coments, Comentario, Perfil, Nombre, TextoComentario, Cargando}

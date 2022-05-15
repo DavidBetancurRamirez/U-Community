@@ -31,7 +31,6 @@ const Contenedor = styled.div`
       width: 200px;
   }
 `;
-
 const OpcionSeleccionada = styled.div`
     width: 100%;
     text-transform: uppercase;
@@ -51,7 +50,6 @@ const OpcionSeleccionada = styled.div`
         font-size: 15px;
     }
 `;
-
 const Opciones = styled.div`
     background: #fff;
     position: absolute;
@@ -61,8 +59,7 @@ const Opciones = styled.div`
     border-radius: 10px;
     max-height: 300px;
     overflow-y: auto;
-`;
- 
+`; 
 const Opcion = styled.div`
     padding: 10px;
     display: flex;

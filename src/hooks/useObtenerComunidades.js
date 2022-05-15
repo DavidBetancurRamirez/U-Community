@@ -1,14 +1,18 @@
 import {useEffect, useState} from "react";
 import { db } from "../firebase/firebaseConfig";
-import { collection, onSnapshot, query, orderBy } from "firebase/firestore";
+import { collection, onSnapshot, query, where } from "firebase/firestore";
+import startOfDay from "date-fns/startOfDay";
+import getUnixTime from 'date-fns/getUnixTime';
 
 const useObtenerComunidades = () => {
     const [comunidades, cambiarComunidades] = useState([])
+    
+    let fechaHoy = getUnixTime(startOfDay(new Date()));
 
     useEffect(() => {
         const consulta = query(
             collection(db, "comunidades"),
-            orderBy('fechaCreacion', 'desc')
+            where('fechaMaxima', '>=', fechaHoy)
         )
 
         const unsuscribe = onSnapshot(consulta, (snapshot) => {
@@ -20,7 +24,7 @@ const useObtenerComunidades = () => {
         });
 
         return unsuscribe
-    }, [])
+    }, [fechaHoy])
     
     return [comunidades];
 }

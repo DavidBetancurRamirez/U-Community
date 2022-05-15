@@ -97,6 +97,10 @@ const Info = styled.div`
         height: 20px;
         float: right;
     }
+
+    .expirado {
+        color: red;
+    }
 `;
 const Fecha = styled.div`
     display: flex;

@@ -6,12 +6,16 @@ import {ReactComponent as IconoInfo} from '../imagenes/IconoInfo.svg'
 import {ReactComponent as IconoCalendario} from '../imagenes/IconoCalendario.svg'
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from "../contextos/authContext";
+import startOfDay from "date-fns/startOfDay";
+import getUnixTime from 'date-fns/getUnixTime';
 
 const MisParticipaciones = () => {
     const [MisParticipaciones] = useObtenerMisParticipaciones();
-
+    
     const navigate = useNavigate();    
     const {user} = useAuth();
+    
+    let fechaHoy = getUnixTime(startOfDay(new Date()));
 
     return (
         MisParticipaciones.length > 0 ?
@@ -29,7 +33,11 @@ const MisParticipaciones = () => {
                         </Objetivo> 
                         <Info>
                             <IconoCalendario />
-                            <Fecha>{formatearFecha(comunidad.fechaMaxima)}</Fecha>
+                            {comunidad.fechaMaxima <= fechaHoy ?
+                                <Fecha className="expirado">{formatearFecha(comunidad.fechaMaxima)}</Fecha>
+                            :
+                                <Fecha>{formatearFecha(comunidad.fechaMaxima)}</Fecha>
+                            }
                             <IconoInfo />
                         </Info>
                     </Comunidad>

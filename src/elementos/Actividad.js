@@ -1,15 +1,14 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import {ReactComponent as IconoPersonas} from '../imagenes/IconoPersonas.svg'
 import {ReactComponent as IconoUnirme} from '../imagenes/IconoUnirme.svg'
 import {ReactComponent as IconoCaution} from '../imagenes/IconoCaution.svg'
 import agregarParticipante from "../firebase/agregarParticipante";
 import { useAuth } from "../contextos/authContext";
-import {Participacion, Participantes, Restricciones, Unirme, ParteComunidad} from "../estilos/comunidad"
+import {Participacion, ContenedorParticipantes, MostrarListaParticipantes, Participantes, Participante, Restricciones, Unirme, ParteComunidad} from "../estilos/comunidad"
 import { useNavigate } from 'react-router-dom';
 
-
-const Actividad = ({comunidad, cambiarEstadoAlerta, cambiarAlerta}) => {
-    const [suscrito, cambiarSuscrito] = useState(false)
+const Actividad = ({comunidad, cambiarEstadoAlerta, cambiarAlerta, suscrito, nombreUsuario}) => {
+    const [mostartParticipantes, cambiarMostartParticipantes] = useState(false)
 
     const navigate = useNavigate();
     const {user} = useAuth()
@@ -24,7 +23,8 @@ const Actividad = ({comunidad, cambiarEstadoAlerta, cambiarAlerta}) => {
                     await agregarParticipante({
                         comunidadId: comunidad.id, 
                         uidUsuario: user.uid,
-                        participantes: comunidad.data().participantes
+                        participantes: comunidad.data().participantes,                        
+                        nombreUsuario: nombreUsuario
                     })
                     window.location.reload(false);
                     cambiarEstadoAlerta(true)
@@ -41,19 +41,22 @@ const Actividad = ({comunidad, cambiarEstadoAlerta, cambiarAlerta}) => {
         }
     }
 
-    useEffect(() => {
-        if(user) {
-            for (let i=0;i<comunidad.data().participantes.length;i++) {
-                if (comunidad.data().participantes[i] === user.uid) {
-                    cambiarSuscrito(true)
-                }
-            }
-        }
-    }, [comunidad, user])
-
     return (
         <Participacion>
-            <Participantes><IconoPersonas />Participantes: {comunidad.data().participantes.length}</Participantes>
+            <ContenedorParticipantes onClick={() => cambiarMostartParticipantes(!mostartParticipantes)}>
+                <Participantes>
+                    <IconoPersonas />Participantes: {comunidad.data().participantes.length}
+
+                    {mostartParticipantes &&
+                        <MostrarListaParticipantes>
+                            {comunidad.data().participantes.map((participante) => (
+                                <Participante key={participante.nombreUsuario}>{participante.nombreUsuario}</Participante>
+                            ))}
+                        </MostrarListaParticipantes>
+                    }
+                </Participantes>
+            </ContenedorParticipantes>
+
 
             {comunidad.data().maxPersonas !== 0 && 
                 <Restricciones>Maximo participantes: {comunidad.data().maxPersonas}<IconoCaution /></Restricciones>

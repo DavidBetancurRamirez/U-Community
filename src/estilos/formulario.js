@@ -160,6 +160,7 @@ const Personas = styled.div`
   margin-top: 30px;
   margin-right: 30px;
   display: flex;
+  align-items: center;
 
   @media (max-width: 900px) {
     margin-right: 0px;
